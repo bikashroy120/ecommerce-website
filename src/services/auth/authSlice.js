@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import authService from "./authServices";
 
 
 const getUserfromLocalStorage = localStorage.getItem("user")
@@ -6,7 +7,6 @@ const getUserfromLocalStorage = localStorage.getItem("user")
   : null;
 const initialState = {
   user: getUserfromLocalStorage,
-  orders: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -15,11 +15,11 @@ const initialState = {
 
 
 
-export const login = createAsyncThunk(
-    "auth/login",
+export const regester = createAsyncThunk(
+    "auth/regester",
     async (userData, thunkAPI) => {
       try {
-        return;
+        return await authService.regester(userData);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
       }
@@ -34,17 +34,17 @@ export const authSlice = createSlice({
     reducers: {},
     extraReducers: (buildeer) => {
         buildeer
-        .addCase(login.pending, (state) => {
+        .addCase(regester.pending, (state) => {
           state.isLoading = true;
         })
-        .addCase(login.fulfilled, (state, action) => {
+        .addCase(regester.fulfilled, (state, action) => {
           state.isError = false;
           state.isLoading = false;
           state.isSuccess = true;
-          state.user = action.payload;
           state.message = "success";
+          console.log(action.payload)
         })
-        .addCase(login.rejected, (state, action) => {
+        .addCase(regester.rejected, (state, action) => {
           state.isError = true;
           state.isSuccess = false;
           state.message = action.error;
