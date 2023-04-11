@@ -5,6 +5,7 @@ import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { regester } from "../services/auth/authSlice";
 const Signup = () => {
   const dispatch = useDispatch()
   const [data,setData]=useState({
@@ -15,8 +16,10 @@ const Signup = () => {
     password:""
   })
 
-const signup = ()=>{
-  dispatch()
+const signup = (e)=>{
+  e.preventDefault();
+  console.log(data)
+  // dispatch(regester(data))
 }
 
 
@@ -29,7 +32,7 @@ const signup = ()=>{
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center mb-3">Sign Up</h3>
-              <form action="" className="d-flex flex-column gap-15">
+              <form className="d-flex flex-column gap-15">
                 <CustomInput type="text" name="name" placeholder="First Name" value={data.fastname} onChange={(e)=>setData({...data,fastname:e.target.value})} />
                 <CustomInput type="text" name="lastname" placeholder="Last Name" 
                   value={data.lastname}
@@ -55,7 +58,7 @@ const signup = ()=>{
                 />
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button className="button border-0">Sign Up</button>
+                    <button type="submit" onClick={signup} className="button border-0">Sign Up</button>
                   </div>
                 </div>
               </form>
