@@ -5,9 +5,25 @@ import ReactStars from "react-rating-stars-component";
 import ProductCard from "../components/ProductCard";
 import Color from "../components/Color";
 import Container from "../components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../services/product/productSlice";
+import { useEffect } from "react";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4);
+  const {product} = useSelector((state)=>state.product)
+  const dispacth = useDispatch()
+
+  const fachtProduct = ()=>{
+    dispacth(getProduct())
+  }
+  useEffect(()=>{
+    fachtProduct()
+  },[])
+
+
+  console.log(product)
+
   return (
     <>
       <Meta title={"Our Store"} />
