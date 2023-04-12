@@ -9,7 +9,7 @@ const regester = async(userData)=>{
 }
 
 const login = async(userData)=>{
-    const responces = await axios.post(`${base_url}/user/regester`,userData)
+    const responces = await axios.post(`${base_url}/user/login`,userData)
     return responces.data
 }
 

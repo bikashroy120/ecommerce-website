@@ -5,7 +5,7 @@ import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { regester } from "../services/auth/authSlice";
+import {register } from "../services/auth/authSlice";
 const Signup = () => {
   const dispatch = useDispatch()
   const [data,setData]=useState({
@@ -19,7 +19,7 @@ const Signup = () => {
 const signup = (e)=>{
   e.preventDefault();
   console.log(data)
-  // dispatch(regester(data))
+  dispatch(register(data))
 }
 
 
