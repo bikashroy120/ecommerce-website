@@ -279,7 +279,8 @@ footer .input-group-text {
   width: 100%;
 }
 .product-card .product-image {
-  height: 270px;
+  height: 100%;
+  margin-bottom: 15px;
 }
 .product-card .product-image img {
   object-fit: contain;
@@ -465,6 +466,14 @@ footer .input-group-text {
 .gr-12 .action-bar {
   top: 17%;
 }
+
+
+.card_icon{
+  background-color: #fff;
+  padding: 8px 10px;
+  border-radius: 50%;
+}
+
 /* Our store ends here */
 
 /* Contact Page */

@@ -10,7 +10,7 @@ import { getProduct } from "../services/product/productSlice";
 import { useEffect } from "react";
 
 const OurStore = () => {
-  const [grid, setGrid] = useState(4);
+  const [grid, setGrid] = useState(3);
   const {product} = useSelector((state)=>state.product)
   const dispacth = useDispatch()
 
@@ -22,7 +22,7 @@ const OurStore = () => {
   },[])
 
 
-  console.log(product)
+  // console.log(product)
 
   return (
     <>
@@ -258,7 +258,7 @@ const OurStore = () => {
             </div>
             <div className="products-list pb-5">
               <div className="d-flex gap-10 flex-wrap">
-                <ProductCard grid={grid} />
+                <ProductCard grid={grid} product={product}/>
               </div>
             </div>
           </div>
