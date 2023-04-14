@@ -1,21 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import wish from "../images/wish.svg";
-import wishlist from "../images/wishlist.svg";
-import watch from "../images/watch.jpg";
-import watch2 from "../images/watch-1.avif";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { creactWishlist, getWishlist } from "../services/product/productSlice";
+import { toast } from "react-toastify";
 const ProductCard = (props) => {
   const { grid,product } = props;
   console.log(product);
   let location = useLocation();
+  const dispacth = useDispatch()
+  const navigate = useNavigate()
+  const {wishlist} = useSelector((state)=>state.product)
+  const {user} = useSelector((state)=>state.auth)
+  useEffect(()=>{
+    dispacth(getWishlist())
+  },[])
+
+  console.log(wishlist)
 
 
   const addWish = (id)=>{
-    console.log(id)
+      if(user){
+        const stttt = wishlist.find((ite)=>ite._id===id)
+        console.log(stttt)
+        if(stttt){
+          toast.error("already add wishlist !")
+        }else{
+          dispacth(creactWishlist(id))
+        }
+      }else{
+        navigate("/login")
+      }
   }
 
 
