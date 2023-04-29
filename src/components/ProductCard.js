@@ -6,7 +6,7 @@ import wish from "../images/wish.svg";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { creactWishlist, getWishlist } from "../services/product/productSlice";
+import { creactWishlist, getWishlist, resetState } from "../services/product/productSlice";
 import { toast } from "react-toastify";
 const ProductCard = (props) => {
   const { grid,product } = props;
@@ -14,29 +14,43 @@ const ProductCard = (props) => {
   let location = useLocation();
   const dispacth = useDispatch()
   const navigate = useNavigate()
-  const {wishlist} = useSelector((state)=>state.product)
+  const {wishlist,wishadd,isSuccess} = useSelector((state)=>state.product)
   const {user} = useSelector((state)=>state.auth)
-  useEffect(()=>{
-    dispacth(getWishlist())
-  },[])
+
 
   console.log(wishlist)
 
 
   const addWish = (id)=>{
+
+    const data = {
+      proId:id
+    }
+
       if(user){
         const stttt = wishlist.find((ite)=>ite._id===id)
-        console.log(stttt)
         if(stttt){
           toast.error("already add wishlist !")
         }else{
-          dispacth(creactWishlist(id))
+          dispacth(creactWishlist(data))
+          setTimeout(() => {
+            dispacth(resetState());
+          }, 3000);
         }
       }else{
         navigate("/login")
       }
   }
 
+  useEffect(()=>{
+    dispacth(getWishlist())
+  },[wishadd])
+
+  useEffect(()=>{
+    if(wishadd && isSuccess){
+      toast.success("SuccessFully add wishlist")
+    }
+  },[wishadd,isSuccess])
 
 
   return (

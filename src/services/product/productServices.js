@@ -8,15 +8,15 @@ const getProduct = async()=>{
     return res.data
 }
 
-const creactWishlist = async(id)=>{
-    const res = await axios.put(`${base_url}/product/wishlist`,{proId:id},config)
+const creactWishlist = async(data)=>{
+    const res = await axios.put(`${base_url}/product/wishlist`,data,config)
     console.log(res)
     return res.data
 }
 
 const getWishlist = async()=>{
     const res = await axios.get(`${base_url}/user/wishlist`,config)
-    return res.data.wishList
+    return res.data.wishlist
 }
 
 
