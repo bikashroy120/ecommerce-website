@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import Container from "../components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../services/product/productSlice";
+import ProductCardHome from "../components/ProductCardHome";
+import Countdown from "react-countdown";
 // import { services } from "../utils/Data";
 
 const Home = () => {
+
+  const [grid, setGrid] = useState(3);
+  const {product} = useSelector((state)=>state.product)
+  const dispacth = useDispatch()
+
+  const fachtProduct = ()=>{
+    dispacth(getProduct())
+  }
+
+
+  useEffect(()=>{
+    fachtProduct()
+  },[])
+
+  const Completionist = () => <span>You are good to go!</span>;
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      return <Completionist />;
+    } else {
+      // Render a countdown
+      return (
+        <span className="">
+          <span className=" bg-orange-500 text-white rounded-md mx-1 px-2 p-1">{hours}</span>:
+          <span className="bg-orange-500 text-white rounded-md mx-1 px-2 p-1">{minutes}</span>:
+          <span className="bg-orange-500 text-white rounded-md mx-1 px-2 p-1">{seconds}</span>
+        </span>
+      );
+    }
+  };
+
+
+
   return (
     <>
       <Container class1="home-wrapper-1 py-5">
@@ -89,10 +126,10 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="home-wrapper-2 py-5">
+      {/* <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
-            {/* <div className="servies d-flex align-items-center justify-content-between">
+            <div className="servies d-flex align-items-center justify-content-between">
               {services?.map((i, j) => {
                 return (
                   <div className="d-flex align-items-center gap-15" key={j}>
@@ -104,10 +141,10 @@ const Home = () => {
                   </div>
                 );
               })}
-            </div> */}
+            </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
       <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
@@ -172,19 +209,62 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="featured-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <div className="col-12">
-            <h3 className="section-heading">Featured Collection</h3>
+      <Container class1="featured-wrapper py-2 home-wrapper-2">
+      <div className="home_product_top">
+          <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+          <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Flash Deals</h2>
+            <div className=''>
+              <span className='text-[]0.7rem md:text-[1rem]'>Ending in</span>
+              <Countdown date={Date.now() + 10000000} renderer={renderer} />
+            </div>
           </div>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
+          <div>
+            <button>See More</button>
+          </div>
+      </div>
+
+      <div className="products-list pb-5">
+              <div className="home_product">
+                <ProductCardHome grid={grid} product={product}/>
+              </div>
+            </div>
+
       </Container>
 
-      <Container class1="famous-wrapper py-5 home-wrapper-2">
+      <Container class1="featured-wrapper py-2 home-wrapper-2">
+      <div className="home_product_top">
+          <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+          <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Special Products</h2>
+          </div>
+          <div>
+            <button>See More</button>
+          </div>
+      </div>
+
+      <div className="products-list pb-5">
+              <div className="home_product">
+                <ProductCardHome grid={grid} product={product}/>
+              </div>
+            </div>
+
+      </Container>
+
+      <Container class1="featured-wrapper py-2 home-wrapper-2">
+      <div className="home_product_top">
+          <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+          <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Just For You</h2>
+          </div>
+      </div>
+
+      <div className="products-list pb-5">
+              <div className="home_product">
+                <ProductCardHome grid={grid} product={product}/>
+              </div>
+            </div>
+
+      </Container>
+
+      {/* <Container class1="famous-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-3">
             <div className="famous-card position-relative">
@@ -247,9 +327,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
 
-      <Container class1="special-wrapper py-5 home-wrapper-2">
+      {/* <Container class1="special-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Special Products</h3>
@@ -261,8 +341,8 @@ const Home = () => {
           <SpecialProduct />
           <SpecialProduct />
         </div>
-      </Container>
-      <Container class1="popular-wrapper py-5 home-wrapper-2">
+      </Container> */}
+      {/* <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Our Popular Products</h3>
@@ -274,7 +354,7 @@ const Home = () => {
           <ProductCard />
           <ProductCard />
         </div>
-      </Container>
+      </Container> */}
       <Container class1="marque-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">

@@ -752,3 +752,28 @@ footer .input-group-text {
   color: var(--color-777777);
 }
 /* Shipping page ends here */
+
+.home_product{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+
+.bg-orange-500{
+  background: #bf4800;
+  border-radius: 8px;
+}
+
+.home_product_top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+
+.home_product_top button{
+  border: none;
+  font-weight: 600;
+}

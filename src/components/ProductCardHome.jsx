@@ -8,7 +8,7 @@ import view from "../images/view.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { creactWishlist, getWishlist, resetState } from "../services/product/productSlice";
 import { toast } from "react-toastify";
-const ProductCard = (props) => {
+const ProductCardHome = (props) => {
   const { grid,product } = props;
   console.log(product);
   let location = useLocation();
@@ -55,9 +55,8 @@ const ProductCard = (props) => {
           product?.map((item,i)=>{
             return(
               <div key={i}
-              className={` ${
-                location.pathname == "/product" ? `gr-${grid}` : `gr-${grid}`
-              } `}
+              className={` w-full ` }
+              style={{width:"100%"}}
             >
               <div
                 // to={`${
@@ -75,12 +74,12 @@ const ProductCard = (props) => {
                   </button>
                 </div>
                 <div className="product-image">
-                  <img src={'http://localhost:5000/uploads/'+item.images[1]} className="img-fluid" alt="product image" />
+                  <img src={'http://localhost:5000/uploads/'+item.images[0]} className="img-fluid" alt="product image" />
                   <img src={'http://localhost:5000/uploads/'+item.images[0]} className="img-fluid" alt="product image" />
                 </div>
                 <div className="product-details">
                   <h6 className="brand">Havels</h6>
-                  <h5 className="product-title">
+                  <h5 className="product-title" style={{height:"45px",width:"100%"}}>
                     {item.title.slice(0,50)}
                   </h5>
                   <ReactStars
@@ -118,4 +117,4 @@ const ProductCard = (props) => {
   );
 };
 
-export default ProductCard;
+export default ProductCardHome;
