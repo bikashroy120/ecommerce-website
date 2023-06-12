@@ -22,6 +22,9 @@ import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 function App() {
+
+  console.log(0.1 + 0.2 === 0.3);
+
   return (
     <>
       <BrowserRouter>
