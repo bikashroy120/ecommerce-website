@@ -55,7 +55,7 @@ const OurStore = () => {
                       id=""
                     />
                     <label className="form-check-label" htmlFor="">
-                      In Stock (1)
+                      In Stock (1)        
                     </label>
                   </div>
                   <div className="form-check">
