@@ -18,7 +18,7 @@ const ProductCardHome = (props) => {
   const {user} = useSelector((state)=>state.auth)
 
 
-  console.log(wishlist)
+  console.log(user)
 
 
   const addWish = (id)=>{
@@ -69,9 +69,6 @@ const ProductCardHome = (props) => {
                 className="product-card position-relative"
               >
                 <div className="wishlist-icon position-absolute">
-                  <button onClick={()=>addWish(item._id)} className="border-0 bg-transparent">
-                    <img src={wish} alt="wishlist" />
-                  </button>
                 </div>
                 <div className="product-image">
                   <img src={'http://localhost:5000/uploads/'+item.images[0]} className="img-fluid" alt="product image" />
@@ -95,12 +92,12 @@ const ProductCardHome = (props) => {
                   </p>
                   <p className="price">${item.price}</p>
                 </div>
-                <div className="action-bar position-absolute">
+                <div className="action-bar position-absolute back_Ground">
                   <div className="d-flex flex-column gap-15">
-                    <button className="border-0 bg-transparent">
-                      <img src={prodcompare} alt="compare" />
-                    </button>
-                    <button className="border-0 bg-transparent">
+                  <button onClick={()=>addWish(item._id)} className="border-0 bg-transparent">
+                    <img src={wish} alt="wishlist" />
+                  </button>
+                    <button onClick={()=>navigate(`product/${item._id}`)} className="border-0 bg-transparent">
                       <img src={view} alt="view" />
                     </button>
                     <button className="border-0 bg-transparent">

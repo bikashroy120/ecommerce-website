@@ -6,6 +6,7 @@ import productServices from "./productServices";
 
 const initialState = {
     product:[],
+    Singalproduct:{},
     wishlist:[],
     isError: false,
     isLoading: false,
@@ -18,6 +19,16 @@ const initialState = {
     "product/getProduct",async(userData,thunkAPI)=>{
         try {
             return await productServices.getProduct()
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+  )
+
+  export const getSingalProduct = createAsyncThunk(
+    "product/getSingalProduct",async(userData,thunkAPI)=>{
+        try {
+            return await productServices.getSingalProduct(userData)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
         }
@@ -61,6 +72,18 @@ const initialState = {
             state.isSuccess=true;
             state.product=action.payload;
         }).addCase(getProduct.rejected,(state,action)=>{
+            state.isLoading=false;
+            state.isError=true;
+            state.isSuccess=false;
+        })
+        .addCase(getSingalProduct.pending,(state)=>{
+            state.isLoading=true;
+        }).addCase(getSingalProduct.fulfilled,(state,action)=>{
+            state.isLoading=false;
+            state.isError=false;
+            state.isSuccess=true;
+            state.Singalproduct=action.payload;
+        }).addCase(getSingalProduct.rejected,(state,action)=>{
             state.isLoading=false;
             state.isError=true;
             state.isSuccess=false;
