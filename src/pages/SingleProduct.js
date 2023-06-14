@@ -13,6 +13,9 @@ import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, getSingalProduct } from "../services/product/productSlice";
 import ProductCardHome from "../components/ProductCardHome";
+import { cartActions } from "../services/card/cardSlice";
+import { toast } from "react-toastify";
+
 const SingleProduct = () => {
 
   const parems = useParams()
@@ -66,6 +69,23 @@ const SingleProduct = () => {
   useEffect(()=>{
     fachtProduct()
   },[])
+
+  const addToCart = (product,count) =>{
+    if(product.quantity===0){
+      toast.error("SuccessFully add Cart")
+   }else{
+    dispatch(cartActions.addToCart({
+      id:product._id,
+      productname: product.title,
+      feature_image: product.images[0],
+      price:product.price,
+      quentyte:count,
+      p_brand:product.brand.title,
+      p_category:product.category.title,
+      p_avaleable:product.quantity,
+  }))};
+  toast.success("SuccessFully add Cart")
+  }
 
   const [orderedProduct, setorderedProduct] = useState(true);
   const copyToClipboard = (text) => {
@@ -166,14 +186,12 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex align-items-center gap-30 ms-5">
                     <button
+                      onClick={()=>addToCart(Singalproduct,count)}
                       className="button border-0"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop"
                       type="button"
                     >
                       Add to Cart
                     </button>
-                    <button className="button signup">Buy It Now</button>
                   </div>
                 </div>
                 <div className="d-flex align-items-center gap-15">

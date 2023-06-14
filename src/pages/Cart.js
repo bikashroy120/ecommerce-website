@@ -25,7 +25,7 @@ const Cart = () => {
       id:product.item,
       productname: product.productname,
       feature_image: product.feature_image,
-      price:product.price,
+      price:product.amount_item,
       quentyte:1,
       p_brand:product.p_brand,
       p_category:product.p_category,
@@ -82,7 +82,7 @@ const Cart = () => {
                       </div>
                   </div>
                   <div className="cart-col-4">
-                    <h5 className="price">$ {item.total_price}</h5>
+                    <h5 className="price">$ {item.amount_item * item.quantity}</h5>
                   </div>
                 </div>
                 )
@@ -96,7 +96,7 @@ const Cart = () => {
                 Continue To Shopping
               </Link>
               <div className="d-flex flex-column align-items-end">
-                <h4>SubTotal: $ 1000</h4>
+                <h4>SubTotal: $ {subtotal}</h4>
                 <p>Taxes and shipping calculated at checkout</p>
                 <Link to="/checkout" className="button">
                   Checkout

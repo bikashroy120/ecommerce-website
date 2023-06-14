@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { creactWishlist, getWishlist, resetState } from "../services/product/productSlice";
 import { toast } from "react-toastify";
 import { cartActions } from "../services/card/cardSlice";
+import {BsBagPlusFill} from "react-icons/bs"
+import {AiTwotoneHeart} from "react-icons/ai"
 const ProductCardHome = (props) => {
   const { grid,product } = props;
   console.log(product);
@@ -53,7 +55,7 @@ const ProductCardHome = (props) => {
 
   const addToCart = (product) =>{
     if(product.quantity===0){
-      toast.success("SuccessFully add Cart")
+      toast.error("SuccessFully add Cart")
    }else{
     dispacth(cartActions.addToCart({
       id:product._id,
@@ -89,16 +91,21 @@ const ProductCardHome = (props) => {
                 // }`}
                 className="product-card position-relative"
               >
-                <div className="wishlist-icon position-absolute">
+
+                <div className="wishlist-icon position-absolute" style={{zIndex:"999"}}>
+                  <button onClick={()=>addWish(item._id)} className="border-0 bg_heart bg-transparent">
+                    <AiTwotoneHeart style={{fontSize:"25px"}}/>
+                  </button>
                 </div>
                 <div className="product-image">
+                 <Link to={`product/${item._id}`}>
                   <img src={'http://localhost:5000/uploads/'+item.images[0]} className="img-fluid" alt="product image" />
-                  <img src={'http://localhost:5000/uploads/'+item.images[0]} className="img-fluid" alt="product image" />
+                 </Link>
                 </div>
                 <div className="product-details">
                   <h6 className="brand">Havels</h6>
                   <h5 className="product-title" style={{height:"45px",width:"100%"}}>
-                    {item.title.slice(0,50)}
+                    {item.title.slice(0,30)}...
                   </h5>
                   <ReactStars
                     count={5}
@@ -108,12 +115,18 @@ const ProductCardHome = (props) => {
                     activeColor="#ffd700"
                   />
                   <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
-                    
-                      {item.description.slice(0,150)}
-                  </p>
-                  <p className="price">${item.price}</p>
+                        
+                        {item.description.slice(0,150)}
+                    </p>
+                  <div style={{display:"flex",alignItems:"center",width:"100%",justifyContent:"space-between"}}>
+                      <p className="price" style={{margin:"0"}}>${item.price}</p>
+                      <button onClick={()=>addToCart(item)} className="home_card_button">
+                      <BsBagPlusFill style={{fontSize:"20px"}} />
+                     </button>
+                  </div>
+                  
                 </div>
-                <div className="action-bar position-absolute back_Ground">
+                {/* <div className="action-bar position-absolute back_Ground">
                   <div className="d-flex flex-column gap-15">
                   <button onClick={()=>addWish(item._id)} className="border-0 bg-transparent">
                     <img src={wish} alt="wishlist" />
@@ -125,7 +138,7 @@ const ProductCardHome = (props) => {
                       <img src={addcart} alt="addcart" />
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             )
