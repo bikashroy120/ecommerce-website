@@ -5,8 +5,39 @@ import watch from "../images/watch.jpg";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { cartActions } from "../services/card/cardSlice";
 
 const Cart = () => {
+  const [count,setCount] = useState(1)
+  const cartItem = useSelector((state)=>state.cart.itemList)
+  const subtotal = useSelector((state)=>state.cart.subtotal);
+  const dispacth = useDispatch()
+  console.log(cartItem)
+
+  const addCart = (product)=>{
+
+
+    console.log(product)
+
+    dispacth(cartActions.addToCart({
+      id:product.item,
+      productname: product.productname,
+      feature_image: product.feature_image,
+      price:product.price,
+      quentyte:1,
+      p_brand:product.p_brand,
+      p_category:product.p_category,
+      p_avaleable:product.p_avaleable,
+  }));
+  }
+
+
+  const decereMent = (item)=>{
+    dispacth(cartActions.decrementQty(item.item));
+  }
+
   return (
     <>
       <Meta title={"Cart"} />
@@ -20,39 +51,44 @@ const Cart = () => {
               <h4 className="cart-col-3">Quantity</h4>
               <h4 className="cart-col-4">Total</h4>
             </div>
-            <div className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
-              <div className="cart-col-1 gap-15 d-flex align-items-center">
-                <div className="w-25">
-                  <img src={watch} className="img-fluid" alt="product image" />
+            {
+
+              cartItem.map((item,i)=>{
+                return(
+                  <div key={1} className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
+                  <div className="cart-col-1 gap-15 d-flex align-items-center">
+                    <div className="w-25">
+                      <img src={`http://localhost:5000/uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
+                    </div>
+                    <div className="w-75">
+                      <p>{item.productname}</p>
+                      <p>Catagory: {item.p_category}</p>
+                    </div>
+                  </div>
+                  <div className="cart-col-2">
+                    <h5 className="price">$ {item.amount_item}</h5>
+                  </div>
+                  <div className="cart-col-3 d-flex align-items-center gap-15">
+                  <div className="button_card">
+                          <button onClick={()=> decereMent(item)}>
+                            -
+                          </button>
+                          <div>
+                              {item.quantity}
+                          </div>
+                          <button onClick={()=>addCart(item)}>
+                            +
+                          </button>
+                      </div>
+                  </div>
+                  <div className="cart-col-4">
+                    <h5 className="price">$ {item.total_price}</h5>
+                  </div>
                 </div>
-                <div className="w-75">
-                  <p>GDffdhg</p>
-                  <p>Size: hgf</p>
-                  <p>Color: gfd</p>
-                </div>
-              </div>
-              <div className="cart-col-2">
-                <h5 className="price">$ 100</h5>
-              </div>
-              <div className="cart-col-3 d-flex align-items-center gap-15">
-                <div>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name=""
-                    min={1}
-                    max={10}
-                    id=""
-                  />
-                </div>
-                <div>
-                  <AiFillDelete className="text-danger " />
-                </div>
-              </div>
-              <div className="cart-col-4">
-                <h5 className="price">$ 100</h5>
-              </div>
-            </div>
+                )
+              })
+
+            }
           </div>
           <div className="col-12 py-2 mt-4">
             <div className="d-flex justify-content-between align-items-baseline">

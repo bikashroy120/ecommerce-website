@@ -6,7 +6,19 @@ import wishlist from "../images/wishlist.svg";
 import user from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { cartActions } from "../services/card/cardSlice";
 const Header = () => {
+
+  const cartItem = useSelector((state)=>state.cart.itemList)
+  const subtotal = useSelector((state)=>state.cart.subtotal);
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(cartActions.getTotals())
+  },[cartItem])
+
   return (
     <>
       <header className="header-top-strip py-3">
@@ -33,10 +45,10 @@ const Header = () => {
           <div className="row align-items-center">
             <div className="col-2">
               <h2>
-                <Link className="text-white">Dev Corner</Link>
+                <Link to={"/"} className="text-white">Bik Corner</Link>
               </h2>
             </div>
-            <div className="col-5">
+            <div className="col-7">
               <div className="input-group">
                 <input
                   type="text"
@@ -50,17 +62,17 @@ const Header = () => {
                 </span>
               </div>
             </div>
-            <div className="col-5">
+            <div className="col-3">
               <div className="header-upper-links d-flex align-items-center justify-content-between">
                 <div>
                   <Link
                     to="/compare-product"
-                    className="d-flex align-items-center gap-10 text-white"
+                    className="d-flex align-items-center gap-2 text-white"
                   >
                     <img src={compare} alt="compare" />
-                    <p className="mb-0">
+                    {/* <p className="mb-0">
                       Compare <br /> Products
-                    </p>
+                    </p> */}
                   </Link>
                 </div>
                 <div>
@@ -69,9 +81,9 @@ const Header = () => {
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src={wishlist} alt="wishlist" />
-                    <p className="mb-0">
+                    {/* <p className="mb-0">
                       Favourite <br /> wishlist
-                    </p>
+                    </p> */}
                   </Link>
                 </div>
                 <div>
@@ -80,9 +92,9 @@ const Header = () => {
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src={user} alt="user" />
-                    <p className="mb-0">
+                    {/* <p className="mb-0">
                       Log in <br /> My Account
-                    </p>
+                    </p> */}
                   </Link>
                 </div>
                 <div>
@@ -92,8 +104,8 @@ const Header = () => {
                   >
                     <img src={cart} alt="cart" />
                     <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">$ 500</p>
+                      <span className="badge bg-white text-dark">{cartItem.length}</span>
+                      <p className="mb-0">$ {subtotal}</p>
                     </div>
                   </Link>
                 </div>

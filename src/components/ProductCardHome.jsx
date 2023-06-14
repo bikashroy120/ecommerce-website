@@ -8,6 +8,7 @@ import view from "../images/view.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { creactWishlist, getWishlist, resetState } from "../services/product/productSlice";
 import { toast } from "react-toastify";
+import { cartActions } from "../services/card/cardSlice";
 const ProductCardHome = (props) => {
   const { grid,product } = props;
   console.log(product);
@@ -45,9 +46,29 @@ const ProductCardHome = (props) => {
 
   useEffect(()=>{
     if(wishadd && isSuccess){
-      toast.success("SuccessFully add wishlist")
+      toast.error("product not abalable")
     }
   },[wishadd,isSuccess])
+
+
+  const addToCart = (product) =>{
+    if(product.quantity===0){
+      toast.success("SuccessFully add Cart")
+   }else{
+    dispacth(cartActions.addToCart({
+      id:product._id,
+      productname: product.title,
+      feature_image: product.images[0],
+      price:product.price,
+      quentyte:1,
+      p_brand:product.brand.title,
+      p_category:product.category.title,
+      p_avaleable:product.quantity,
+  }))};
+  toast.success("SuccessFully add Cart")
+  }
+
+
 
   return (
     <>
@@ -100,7 +121,7 @@ const ProductCardHome = (props) => {
                     <button onClick={()=>navigate(`product/${item._id}`)} className="border-0 bg-transparent">
                       <img src={view} alt="view" />
                     </button>
-                    <button className="border-0 bg-transparent">
+                    <button onClick={()=>addToCart(item)} className="border-0 bg-transparent">
                       <img src={addcart} alt="addcart" />
                     </button>
                   </div>
