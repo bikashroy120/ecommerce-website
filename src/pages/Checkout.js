@@ -11,6 +11,10 @@ import { cartActions } from "../services/card/cardSlice";
 import { useEffect } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import axios from "axios";
+import { config } from "../utils/axiosconfig";
+import { base_url } from "../utils/baseUrl";
+import { creactOrder } from "../services/profile/profileSlice";
 
 
 let schema = yup.object().shape({
@@ -30,6 +34,7 @@ let schema = yup.object().shape({
 const Checkout = () => {
   const cartItem = useSelector((state)=>state.cart.itemList)
   const subtotal = useSelector((state)=>state.cart.subtotal);
+  const {order,isLoading,isSuccess} = useSelector((state)=>state.profile)
   const [dId,setDID] = useState()
   const [cId,setCID] = useState()
   const [total,setTotle]=useState()
@@ -95,9 +100,18 @@ const Checkout = () => {
       formik.values.shipping = dId === 1 ? "FedEx" : "UPS"
       formik.values.method = cId === 1 ? "Cash" : "Card"
       formik.values.totle = total
-  },[dId,cId,total])
+      formik.values.products = cartItem
+  },[dId,cId,total,cartItem])
 
+  useEffect(()=>{
+    localStorage.removeItem("cartdata")
+  },[isSuccess,order])
 
+  // const CreactOrder = async(data)=>{
+  //   const res = await axios.post(`${base_url}/user/add-order`,data,config)
+  //   console.log(res)
+  // }
+  console.log(order)
 
   const formik = useFormik({
     initialValues: {
@@ -112,12 +126,14 @@ const Checkout = () => {
       shipping: "",
       method: "",
       totle: "",
-      discount:"00"
+      discount:"00",
+      products:[]
     },
     validationSchema: schema,
     onSubmit: (values) => {
       // formik.resetForm();
-      console.log(values)
+      // CreactOrder(values)
+      dispacth(creactOrder(values))
     },
   });
 

@@ -945,3 +945,22 @@ footer .input-group-text {
 .error{
   color: red;
 }
+
+.invoice_box{
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.invoice_box_first_div{
+  background: #febd69;
+  padding: 30px 30px;
+}
+
+.invioce_head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 2px solid #fff;
+}
