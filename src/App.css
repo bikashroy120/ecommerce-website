@@ -913,3 +913,35 @@ footer .input-group-text {
 .bg_green{
   background: rgb(2, 227, 2);
 }
+
+.Shopping_summary{
+  background: #fff;
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.Cart_product_show{
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+
+.Chakeout_box_button{
+  padding: 10px 20px;
+  border: 1px solid rgb(206, 202, 202);
+  font-size: 20px;
+  background: transparent;
+  transition: 0.4s;
+  border-radius: 5px;
+}
+
+.Chakeout_box_button:hover{
+  background: #bf4800;
+  color: #fff;
+}
+
+.error{
+  color: red;
+}

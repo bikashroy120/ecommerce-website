@@ -79,7 +79,7 @@ const Cart = () => {
                           <button onClick={()=>addCart(item)}>
                             +
                           </button>
-                      </div>
+                    </div>
                   </div>
                   <div className="cart-col-4">
                     <h5 className="price">$ {item.amount_item * item.quantity}</h5>
