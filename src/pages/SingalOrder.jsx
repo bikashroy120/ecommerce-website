@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSingalOrder } from '../services/profile/profileSlice'
-import DataTable from 'react-data-table-component'
 import Table from '../components/Table'
 
 
@@ -23,8 +22,8 @@ const SingalOrder = () => {
         {
             name: 'SR.',
             selector: row => <img src={`http://localhost:5000/uploads/${row.feature_image}`} className='' style={{width:"40px", height:"40px",borderRadius:"50%"}} ></img>,
-            left:true,
-            width: "100px"   
+            center:true,
+            width: "150px"   
         },
         {
             name: 'PRODUCT NAME',
@@ -44,7 +43,7 @@ const SingalOrder = () => {
         {
             name: 'AMOUNT',
             selector: row => row.total_price,
-            right:true
+            center:true
         },
     ];
 
@@ -52,7 +51,7 @@ const SingalOrder = () => {
     <>
         <Container class1="checkout-wrapper py-5 home-wrapper-2">
             <div className='invoice_box'>
-                <div className='invoice_box_first_div'>
+                <div className='invoice_box_first_div px-5'>
                     <div className='invioce_head'>
                         <div>
                             <h3>INVOICE</h3>
@@ -80,9 +79,28 @@ const SingalOrder = () => {
                 </div>
 
 
-                <div className=' py-5 px-3'>
-                    <div className=' border-1 border-2 border-black'>
+                <div className=' py-5 px-5'>
+                    <div className=' border_data'>
                     <Table columns={columns} data={singalOrder.products} />
+                    </div>
+                </div>
+
+                <div className='background_color py-5 px-5 d-flex align-items-center justify-content-between flex-wrap gap-3'>
+                    <div>
+                        <h5>PAYMENT METHOD</h5>
+                        <p>{singalOrder.method}</p>
+                    </div>
+                    <div>
+                        <h5>SHIPPING COST</h5>
+                        <p>{singalOrder.shipping==="FedEx" ? "60" : "20"}</p>
+                    </div>
+                    <div>
+                        <h5>DISCOUNT</h5>
+                        <p>$ {singalOrder.discount}</p>
+                    </div>
+                    <div>
+                        <h5>TOTAL AMOUNT</h5>
+                        <h5 style={{color:"red"}}>$ {singalOrder.totle}</h5>
                     </div>
                 </div>
 

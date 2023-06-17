@@ -22,6 +22,7 @@ import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import SingalOrder from "./pages/SingalOrder";
+import Profile from "./pages/Profile";
 function App() {
 
   console.log(0.1 + 0.2 === 0.3);
@@ -44,6 +45,7 @@ function App() {
             <Route path="compare-product" element={<CompareProduct />} />
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="login" element={<Login />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="forgot-password" element={<Forgotpassword />} />
             <Route path="signup" element={<Signup />} />
             <Route path="reset-password" element={<Resetpassword />} />

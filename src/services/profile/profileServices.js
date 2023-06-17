@@ -4,19 +4,23 @@ import { base_url } from "../../utils/baseUrl";
 
 const creactOrder = async(data)=>{
     const res = await axios.post(`${base_url}/user/add-order`,data,config)
-    console.log(res)
     return res.data
 }
 
 const singalOrder = async(data)=>{
     const res = await axios.get(`${base_url}/user/order/${data}`,config)
-    console.log(res)
+    return res.data
+}
+
+const dashbord = async(data)=>{
+    const res = await axios.get(`${base_url}/user/user-order`,config)
     return res.data
 }
 
 const profileServices = {
     creactOrder,
-    singalOrder
+    singalOrder,
+    dashbord
   };
   
   export default profileServices;
