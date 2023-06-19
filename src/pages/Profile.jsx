@@ -7,6 +7,8 @@ import {AiOutlineUnlock} from "react-icons/ai"
 import Container from '../components/Container'
 import { useState } from 'react'
 import Dashbord from '../components/profile/Dashbord'
+import Order from '../components/profile/Order'
+import UpdateProfile from '../components/profile/UpdateProfile'
 
 const Profile = () => {
     const [profileActive,setprofileActive] = useState(1)
@@ -61,6 +63,15 @@ const Profile = () => {
                     <div className=' bg-white rounded-3 px-4 py-4'>
                         {
                             profileActive === 1 && <Dashbord />
+                            
+                        }
+
+                        {
+                            profileActive === 2 && <Order />
+                        }
+
+                        {
+                            profileActive === 3 && <UpdateProfile />
                         }
                     </div>
                 </div>

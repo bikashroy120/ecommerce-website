@@ -12,7 +12,64 @@ import { useEffect } from "react";
 const OurStore = () => {
   const [grid, setGrid] = useState(3);
   const {product} = useSelector((state)=>state.product)
+  const [brand,setbrand] = useState([])
+  const [category,setCategory] = useState([])
+  const [select,setSelect]=useState([])
+  const [filterCat,setFilterCat] = useState("")
+  const [update,setUpdate]=useState([])
+  const [last,setLast]=useState([])
   const dispacth = useDispatch()
+
+  useEffect(()=>{
+    let category = []
+    const brandName = []
+
+    for (let i = 0; i< product.length;i++){
+      const element = product[i]
+      category.push(element.category.title)
+    }
+
+    for (let i = 0; i< category.length;i++){
+        const element = category[i]
+        let index = brandName.indexOf(element)    
+        if(index == -1){
+          brandName.push(element)
+        }
+      }
+      
+      setCategory(brandName)
+      setUpdate(product)
+  },[product])
+
+  useEffect(()=>{
+    if(filterCat===""){
+      setUpdate(product)
+    }else{
+      const  updataproduct = product.filter((item)=>item.category.title === filterCat)
+      setUpdate(updataproduct)
+      setLast(updataproduct)
+    }
+  },[product,filterCat])
+
+  useEffect(()=>{
+    let category = []
+    const brandName = []
+
+    for (let i = 0; i< update.length;i++){
+      const element = update[i]
+      category.push(element.brand.title)
+    }
+
+    for (let i = 0; i< category.length;i++){
+        const element = category[i]
+        let index = brandName.indexOf(element)    
+        if(index == -1){
+          brandName.push(element)
+        }
+      }
+      setbrand(brandName)
+  },[filterCat,update])
+
 
   const fachtProduct = ()=>{
     dispacth(getProduct())
@@ -22,8 +79,33 @@ const OurStore = () => {
   },[])
 
 
-  // console.log(product)
 
+  // console.log(product)
+  const categorySet = (item)=>{
+    setFilterCat(item)
+  }
+
+
+const handelSelect = (item)=>{
+  const isSelect = Boolean(select.find((i)=> i === item))
+  if(isSelect){
+    setSelect(select.filter((i)=> i !== item))
+  }else{
+    setSelect((pre)=>[...pre,item])
+  }
+
+}
+
+useEffect(()=>{
+  if(select.length===0){
+    setLast(update)
+  }else{
+    const last = update.filter((e)=>select.includes(e.brand.title))
+    setLast(last)
+  }
+},[select,update])
+
+console.log(last)
   return (
     <>
       <Meta title={"Our Store"} />
@@ -34,40 +116,45 @@ const OurStore = () => {
             <div className="filter-card mb-3">
               <h3 className="filter-title">Shop By Categories</h3>
               <div>
-                <ul className="ps-0">
-                  <li>Watch</li>
-                  <li>Tv</li>
-                  <li>Camera</li>
-                  <li>Laptop</li>
+                <ul className=" ml-5">
+                  <li style={{fontSize:"17px"}} onClick={()=>categorySet("")} className={`${""===filterCat? " text-danger" : ""}`}>{"All"}</li>
+                    {
+                      category?.map((item,i)=>{
+                        return(
+                          <li style={{fontSize:"17px"}} onClick={()=>categorySet(item)} className={`${item===filterCat? " text-danger" : ""}`} key={i}>{item}</li>
+                        )
+                      })
+                    }
                 </ul>
               </div>
             </div>
             <div className="filter-card mb-3">
-              <h3 className="filter-title">Filter By</h3>
+              <h3 className="filter-title">Filter By Brand</h3>
               <div>
-                <h5 className="sub-title">Availablity</h5>
                 <div>
+
                   <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id=""
-                    />
-                    <label className="form-check-label" htmlFor="">
-                      In Stock (1)        
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id=""
-                    />
-                    <label className="form-check-label" htmlFor="">
-                      Out of Stock(0)
-                    </label>
+
+                      {
+                        brand?.map((item,i)=>{
+                          const isSelect = Boolean(select.find((i)=> i === item))
+                          return(
+                            <div key={i} className="form-check">
+                            <input
+                              className="form-check-input"
+                              onChange={() => handelSelect(item)}
+                              type="checkbox"
+                              id={item}
+                              checked={isSelect}
+                            />
+                            <label className="form-check-label" htmlFor={item}  style={{fontSize:"17px",marginTop:"-3px"}}>
+                              {item}
+                            </label>
+                            </div>
+                          )
+                        })
+                      }
+
                   </div>
                 </div>
                 <h5 className="sub-title">Price</h5>
@@ -91,38 +178,9 @@ const OurStore = () => {
                     <label htmlFor="floatingInput1">To</label>
                   </div>
                 </div>
-                <h5 className="sub-title">Colors</h5>
-                <div>
-                  <Color />
-                </div>
-                <h5 className="sub-title">Size</h5>
-                <div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="color-1"
-                    />
-                    <label className="form-check-label" htmlFor="color-1">
-                      S (2)
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="color-2"
-                    />
-                    <label className="form-check-label" htmlFor="color-2">
-                      M (2)
-                    </label>
-                  </div>
-                </div>
               </div>
             </div>
-            <div className="filter-card mb-3">
+            {/* <div className="filter-card mb-3">
               <h3 className="filter-title">Product Tags</h3>
               <div>
                 <div className="product-tags d-flex flex-wrap align-items-center gap-10">
@@ -140,8 +198,8 @@ const OurStore = () => {
                   </span>
                 </div>
               </div>
-            </div>
-            <div className="filter-card mb-3">
+            </div> */}
+            {/* <div className="filter-card mb-3">
               <h3 className="filter-title">Random Product</h3>
               <div>
                 <div className="random-products mb-3 d-flex">
@@ -189,7 +247,7 @@ const OurStore = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="col-9">
             <div className="filter-sort-grid mb-4">
@@ -258,7 +316,7 @@ const OurStore = () => {
             </div>
             <div className="products-list pb-5">
               <div className="d-flex gap-10 flex-wrap">
-                <ProductCard grid={grid} product={product}/>
+                <ProductCard grid={grid} product={last}/>
               </div>
             </div>
           </div>
