@@ -28,7 +28,8 @@ const Table = ({columns,data}) => {
   const customStyles = {
     rows: {
         style: {
-            minHeight: '35px', // override the row height
+            minHeight: '40px', // override the row height
+            fontSize:"16px"
         },
     },
     headCells: {
@@ -36,6 +37,7 @@ const Table = ({columns,data}) => {
             paddingLeft: '8px', // override the cell padding for head cells
             paddingRight: '8px',
             background:"lightGray",
+            fontSize:"16px"
         },
     },
     cells: {

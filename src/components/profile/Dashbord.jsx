@@ -21,31 +21,33 @@ const Dashbord = () => {
 
 const columns = [
         {
-            name: 'Image',
-            selector: row => "hi",
-            center:true,
-            width: "150px"   
+            name: 'ID',
+            selector: row => row._id?.slice(0,8),
         },
         {
-            name: 'PRODUCT NAME',
-            selector: row => "hi",
-            width: "400px"    
+            name: 'ORDERTIME',
+            selector: row => row.createdAt?.slice(0,10), 
         },
         {
-            name: 'QUANTITY',
-            selector: row => "hi",
+            name: 'METHOD',
+            selector: row => row.method,
             center:true
         },
         {
-            name: 'ITEM PRICE',
-            selector: row => "hi",
+            name: 'STATUS',
+            selector: row => <p className={row.orderStatus==="Pending" && "text-danger" || row.orderStatus==="Processing" && "text-warning"  || row.orderStatus==="Complete" && "text-primary"  } style={{margin:"0",padding:"0"}}>{row.orderStatus}</p>,
             center:true
         },
         {
-            name: 'AMOUNT',
-            selector: row => "hi",
+            name: 'TOTAL',
+            selector: row => row.totle            ,
             center:true
         },
+        // {
+        //     name: 'ACTION',
+        //     selector: row => <button>details</button>,
+        //     center:true
+        // },
     ];
 
   return (
@@ -59,7 +61,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Total Order</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>20</h5>
+                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.totalOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -70,7 +72,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Pending Order</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>20</h5>
+                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.paddingOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -81,7 +83,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Processing Orde</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>20</h5>
+                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.ProcessingOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -92,7 +94,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Complete Order</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>20</h5>
+                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.CompleteOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -100,7 +102,11 @@ const columns = [
 
         <div className='row'>
             <div className='col-12'>
-                <Table columns={columns} data={[]}/>
+                <h5 className=' mt-4'>Recent Order</h5>
+                <div className='border_data'>
+                <Table columns={columns} data={dashbord.order}/>
+                </div>
+                
             </div>
         </div>
     </div>
