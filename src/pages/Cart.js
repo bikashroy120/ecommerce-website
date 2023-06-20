@@ -39,7 +39,7 @@ const Cart = () => {
   }
 
   return (
-    <>
+    <div className="container_margin_top">
       <Meta title={"Cart"} />
       <BreadCrumb title="Cart" />
       <Container class1="cart-wrapper home-wrapper-2 py-5">
@@ -106,7 +106,7 @@ const Cart = () => {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

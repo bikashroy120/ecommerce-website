@@ -6,7 +6,7 @@ import Container from "../components/Container";
 
 const Blog = () => {
   return (
-    <>
+    <div className="container_margin_top">
       <Meta title={"Blogs"} />
       <BreadCrumb title="Blogs" />
       <Container class1="blog-wrapper home-wrapper-2 py-5">
@@ -42,7 +42,7 @@ const Blog = () => {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

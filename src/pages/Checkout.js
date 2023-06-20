@@ -140,7 +140,7 @@ const Checkout = () => {
 
 
   return (
-    <>
+    <div className="container_margin_top">
       <Container class1="checkout-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-7">
@@ -457,7 +457,7 @@ const Checkout = () => {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

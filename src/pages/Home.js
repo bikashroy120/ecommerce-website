@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../services/product/productSlice";
 import ProductCardHome from "../components/ProductCardHome";
 import Countdown from "react-countdown";
+import HomeSlyder from "../components/HomeSlyder";
 // import { services } from "../utils/Data";
 
 const Home = () => {
@@ -49,23 +50,11 @@ const Home = () => {
     <>
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
-          <div className="col-6">
-            <div className="main-banner position-relative ">
-              <img
-                src="images/main-banner-1.jpg"
-                className="img-fluid rounded-3"
-                alt="main banner"
-              />
-              <div className="main-banner-content position-absolute">
-                <h4>SUPERCHARGED FOR PROS.</h4>
-                <h5>iPad S13+ Pro.</h5>
-                <p>From $999.00 or $41.62/mo.</p>
-                <Link className="button">BUY NOW</Link>
-              </div>
-            </div>
+          <div className="col-6 ">
+            <HomeSlyder />
           </div>
           <div className="col-6">
-            <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
+            {/* <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
               <div className="small-banner position-relative">
                 <img
                   src="images/catbanner-01.jpg"
@@ -122,7 +111,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </Container>
@@ -145,7 +134,7 @@ const Home = () => {
           </div>
         </div>
       </Container> */}
-      <Container class1="home-wrapper-2 py-5">
+      {/* <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
@@ -208,8 +197,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container>
-      <Container class1="featured-wrapper py-2 home-wrapper-2">
+      </Container> */}
+      {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
       <div className="home_product_top">
           <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
           <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Flash Deals</h2>
@@ -229,9 +218,9 @@ const Home = () => {
               </div>
             </div>
 
-      </Container>
+      </Container> */}
 
-      <Container class1="featured-wrapper py-2 home-wrapper-2">
+      {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
       <div className="home_product_top">
           <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
           <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Special Products</h2>
@@ -247,9 +236,9 @@ const Home = () => {
               </div>
             </div>
 
-      </Container>
+      </Container> */}
 
-      <Container class1="featured-wrapper py-2 home-wrapper-2">
+      {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
       <div className="home_product_top">
           <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
           <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Just For You</h2>
@@ -262,9 +251,9 @@ const Home = () => {
               </div>
         </div>
 
-      </Container>
+      </Container> */}
 
-      <Container class1="marque-wrapper home-wrapper-2 py-5">
+      {/* <Container class1="marque-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
             <div className="marquee-inner-wrapper card-wrapper">
@@ -297,9 +286,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
 
-      <Container class1="blog-wrapper py-5 home-wrapper-2">
+      {/* <Container class1="blog-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Our Latest Blogs</h3>
@@ -319,7 +308,7 @@ const Home = () => {
             <BlogCard />
           </div>
         </div>
-      </Container>
+      </Container> */}
     </>
   );
 };
