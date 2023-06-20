@@ -112,7 +112,7 @@ console.log(last)
       <BreadCrumb title="Our Store" />
       <Container class1="store-wrapper home-wrapper-2 py-5">
         <div className="row">
-          <div className="col-3">
+          <div className="col-lg-3 col-12">
             <div className="filter-card mb-3">
               <h3 className="filter-title">Shop By Categories</h3>
               <div>
@@ -249,7 +249,7 @@ console.log(last)
               </div>
             </div> */}
           </div>
-          <div className="col-9">
+          <div className="col-lg-9 col-12">
             <div className="filter-sort-grid mb-4">
               <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center gap-10">
@@ -274,7 +274,7 @@ console.log(last)
                     <option value="created-descending">Date, new to old</option>
                   </select>
                 </div>
-                <div className="d-flex align-items-center gap-10">
+                <div className="d-flex align-items-center gap-10 hide_item">
                   <p className="totalproducts mb-0">21 Products</p>
                   <div className="d-flex gap-10 align-items-center grid">
                     <img
@@ -315,7 +315,7 @@ console.log(last)
               </div>
             </div>
             <div className="products-list pb-5">
-              <div className="d-flex gap-10 flex-wrap">
+              <div className="d-flex flex-wrap Last_item_product" style={{gap:"9px"}}>
                 <ProductCard grid={grid} product={last}/>
               </div>
             </div>

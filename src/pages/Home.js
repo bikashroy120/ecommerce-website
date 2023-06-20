@@ -50,12 +50,12 @@ const Home = () => {
     <>
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
-          <div className="col-6 ">
+          <div className="col-12 col-md-6 ">
             <HomeSlyder />
           </div>
-          <div className="col-6">
-            {/* <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
-              <div className="small-banner position-relative">
+          <div className="col-12 col-md-6">
+            <div className="row">
+              <div className="small-banner col-6 mb-4 position-relative">
                 <img
                   src="images/catbanner-01.jpg"
                   className="img-fluid rounded-3"
@@ -69,7 +69,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="small-banner position-relative">
+              <div className="small-banner col-6 position-relative">
                 <img
                   src="images/catbanner-02.jpg"
                   className="img-fluid rounded-3"
@@ -83,7 +83,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="small-banner position-relative ">
+              <div className="small-banner col-6 position-relative ">
                 <img
                   src="images/catbanner-03.jpg"
                   className="img-fluid rounded-3"
@@ -97,7 +97,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="small-banner position-relative ">
+              <div className="small-banner col-6 position-relative ">
                 <img
                   src="images/catbanner-04.jpg"
                   className="img-fluid rounded-3"
@@ -111,7 +111,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </Container>
@@ -134,74 +134,58 @@ const Home = () => {
           </div>
         </div>
       </Container> */}
-      {/* <Container class1="home-wrapper-2 py-5">
+      <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
-            <div className="categories d-flex justify-content-between flex-wrap align-items-center">
-              <div className="d-flex gap align-items-center">
-                <div>
+            <div className="categories flex-wrap align-items-center">
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
                   <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
+                
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Cameras</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Tv</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/tv.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/headphone.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
                   <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
+                
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Cameras</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
+                  <h6>Music & Gaming</h6>
+                
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Tv</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/tv.jpg" alt="camera" />
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
+                  <h6>Music & Gaming</h6>
+                
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/headphone.jpg" alt="camera" />
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
+                  <h6>Music & Gaming</h6>
+                
+              </div>
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
+                  <h6>Music & Gaming</h6>
+                
+              </div>
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
+                  <h6>Music & Gaming</h6>
+                
+              </div>
+              <div className="d-flex gap flex-column align-items-center">
+              <img className="category_image" src="images/camera.jpg" alt="camera" />
+                  <h6>Music & Gaming</h6>
+                
               </div>
             </div>
           </div>
         </div>
-      </Container> */}
-      {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
+      </Container>
+      <Container class1="featured-wrapper py-2 home-wrapper-2">
       <div className="home_product_top">
-          <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
-          <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Flash Deals</h2>
+          <div className="FalseDale">
+            <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Flash Deals</h2>
             <div className=''>
               <span className='text-[]0.7rem md:text-[1rem]'>Ending in</span>
               <Countdown date={Date.now() + 10000000} renderer={renderer} />
@@ -218,7 +202,7 @@ const Home = () => {
               </div>
             </div>
 
-      </Container> */}
+      </Container>
 
       {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
       <div className="home_product_top">
@@ -238,7 +222,7 @@ const Home = () => {
 
       </Container> */}
 
-      {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
+      <Container class1="featured-wrapper py-2 home-wrapper-2">
       <div className="home_product_top">
           <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
           <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Just For You</h2>
@@ -251,7 +235,7 @@ const Home = () => {
               </div>
         </div>
 
-      </Container> */}
+      </Container>
 
       {/* <Container class1="marque-wrapper home-wrapper-2 py-5">
         <div className="row">

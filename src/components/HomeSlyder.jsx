@@ -9,6 +9,7 @@ const HomeSlyder = () => {
     const settings = {
         dots: true,
         infinite: true,
+        arrows:false,
         autoplay:true,
         speed: 500,
         slidesToShow: 1,
@@ -18,9 +19,13 @@ const HomeSlyder = () => {
   return (
     <div className=' w-100 h-100'>
         <Slider {...settings}>
-          <div className="main-banner w-100 bg-danger h-100  ">
-
-              <div className="main-banner-content">
+        <div className="main-banner position-relative ">
+              <img
+                src="images/main-banner-1.jpg"
+                className="img-fluid rounded-3"
+                alt="main banner"
+              />
+              <div className="main-banner-content position-absolute">
                 <h4>SUPERCHARGED FOR PROS.</h4>
                 <h5>iPad S13+ Pro.</h5>
                 <p>From $999.00 or $41.62/mo.</p>
@@ -28,26 +33,32 @@ const HomeSlyder = () => {
               </div>
             </div>
 
-          <div>
-          <div className="main-banner  ">
-              <div className="main-banner-content ">
+            <div className="main-banner position-relative ">
+              <img
+                src="images/main-banner-1.jpg"
+                className="img-fluid rounded-3"
+                alt="main banner"
+              />
+              <div className="main-banner-content position-absolute">
                 <h4>SUPERCHARGED FOR PROS.</h4>
                 <h5>iPad S13+ Pro.</h5>
                 <p>From $999.00 or $41.62/mo.</p>
                 <Link className="button">BUY NOW</Link>
               </div>
             </div>
-          </div>
-          <div>
-          <div className="main-banner  ">
-              <div className="main-banner-content">
+            <div className="main-banner position-relative ">
+              <img
+                src="images/main-banner-1.jpg"
+                className="img-fluid rounded-3"
+                alt="main banner"
+              />
+              <div className="main-banner-content position-absolute">
                 <h4>SUPERCHARGED FOR PROS.</h4>
                 <h5>iPad S13+ Pro.</h5>
                 <p>From $999.00 or $41.62/mo.</p>
                 <Link className="button">BUY NOW</Link>
               </div>
             </div>
-          </div>
         </Slider>
     </div>
   )

@@ -77,7 +77,7 @@ const ProductCard = (props) => {
               <div key={i}
               className={` ${
                 location.pathname == "/product" ? `gr-${grid}` : `gr-${grid}`
-              } `}
+              } width_100 `}
             >
               <div
                 // to={`${

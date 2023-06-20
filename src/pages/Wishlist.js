@@ -50,7 +50,7 @@ const Wishlist = () => {
           {
             wishlist?.map((item,i)=>{
               return(
-                <div className="col-3" key={i}>
+                <div className="col-lg-3 col-md-4 col-6" key={i}>
                 <div className="wishlist-card position-relative">
                   <img
                     onClick={()=>deleteWishlist(item._id)}
@@ -67,7 +67,7 @@ const Wishlist = () => {
                   </div>
                   <div className="py-3 px-3">
                     <h5 className="title">
-                      {item.title?.slice(0,90)}
+                      {item.title?.slice(0,40)}
                     </h5>
                     <h6 className="price">$ {item.price}</h6>
                   </div>

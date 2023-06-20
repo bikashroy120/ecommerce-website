@@ -51,7 +51,7 @@ const SingalOrder = () => {
     <>
         <Container class1="checkout-wrapper py-5 home-wrapper-2">
             <div className='invoice_box'>
-                <div className='invoice_box_first_div px-5'>
+                <div className='invoice_box_first_div flex-wrap px-5'>
                     <div className='invioce_head'>
                         <div>
                             <h3>INVOICE</h3>
@@ -62,7 +62,7 @@ const SingalOrder = () => {
                             <p>Bambali, Sédhiou, Senegal</p>
                         </div>
                     </div>
-                    <div className=' d-flex justify-content-between pt-3'>
+                    <div className=' d-flex justify-content-between flex-wrap pt-3'>
                         <div>
                             <h5>Date</h5>
                             <p>{singalOrder?.createdAt?.slice(0,10)}</p>

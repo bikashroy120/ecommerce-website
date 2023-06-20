@@ -104,7 +104,7 @@ const SingleProduct = () => {
       <BreadCrumb title={Singalproduct?.title} />
       <Container class1="main-product-wrapper py-5 home-wrapper-2">
         <div className="row">
-          <div className="col-5">
+          <div className="col-md-5 col-12">
             <div className="main-product-image">
               <div>
                 {/* <ReactImageZoom {...props} /> */}
@@ -131,7 +131,7 @@ const SingleProduct = () => {
   
             </div>
           </div>
-          <div className="col-7">
+          <div className="col-md-7 col-12">
             <div className="main-product-details">
               <div className="border-bottom">
                 <h3 className="title">
@@ -171,7 +171,7 @@ const SingleProduct = () => {
                   <h3 className="product-heading">Availablity :</h3>
                   <p className="product-data">In Stock</p>
                 </div>
-                <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
+                <div className="d-flex align-items-center gap-15 flex-row flex-wrap mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>
                   <div className="button_card">
                       <button onClick={()=>setCount((pre)=> pre===1? 1 : pre-1)} style={{cursor:`${count===1 ? "not-allowed" :""}`}}>

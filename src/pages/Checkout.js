@@ -143,7 +143,7 @@ const Checkout = () => {
     <div className="container_margin_top">
       <Container class1="checkout-wrapper py-5 home-wrapper-2">
         <div className="row">
-          <div className="col-7">
+          <div className="col-lg-7 col-12">
             <div className="checkout-left-data">
               {/* <h3 className="website-name">Dev Corner</h3>
               <nav
@@ -374,7 +374,7 @@ const Checkout = () => {
                       Return to Cart
                     </Link>
                     <button type="submit" className="button">
-                      Continue to Shipping
+                      Order
                     </button>
                   </div>
 
@@ -385,7 +385,7 @@ const Checkout = () => {
 
                       
 
-          <div className="col-5 ">
+          <div className="col-lg-5 col-12 ">
               <div className="Shopping_summary">
                 <h4>Order Summary</h4>
                 <div className="Cart_product_show">

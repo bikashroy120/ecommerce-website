@@ -44,7 +44,7 @@ const Cart = () => {
       <BreadCrumb title="Cart" />
       <Container class1="cart-wrapper home-wrapper-2 py-5">
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 hidden_item_card">
             <div className="cart-header py-3 d-flex justify-content-between align-items-center">
               <h4 className="cart-col-1">Product</h4>
               <h4 className="cart-col-2">Price</h4>
@@ -90,9 +90,51 @@ const Cart = () => {
 
             }
           </div>
+
+          <div className="col-12">
+          <div className="mobile_card">
+            {
+                            cartItem.map((item,i)=>{
+                              return(
+                                <div key={1} className=" mb-4">
+                                <div className=" gap-15 d-flex align-items-center">
+                                  <div style={{width:"25%"}}>
+                                    <img src={`http://localhost:5000/uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
+                                  </div>
+                                  <div style={{width:"75%"}}>
+                                    <p style={{fontSize:"14px"}}>{item.productname?.slice(0,35)}</p>
+                                    <div className=" d-flex align-items-center justify-content-between">
+                                    <h5 style={{fontSize:"14px"}} className="price">$ {item.amount_item}</h5>
+                
+                                    <div className=" d-flex align-items-center gap-15">
+                                      <div className="button_card">
+                                              <button onClick={()=> decereMent(item)} style={{padding:"2px 10px"}}>
+                                                -
+                                              </button>
+                                              <div style={{padding:"2px 10px",fontSize:"20px"}}>
+                                                  {item.quantity}
+                                              </div>
+                                              <button onClick={()=>addCart(item)} style={{padding:"2px 10px"}}>
+                                                +
+                                              </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                {/* <div className="cart-col-4">
+                                  <h5 className="price">$ {item.amount_item * item.quantity}</h5>
+                                </div> */}
+                              </div>
+                              )
+                            })
+            }
+        </div>
+          </div>
+
           <div className="col-12 py-2 mt-4">
-            <div className="d-flex justify-content-between align-items-baseline">
-              <Link to="/product" className="button">
+            <div className="d-flex justify-content-between flex-wrap align-items-baseline">
+              <Link to="/product" className="button mb-4">
                 Continue To Shopping
               </Link>
               <div className="d-flex flex-column align-items-end">
@@ -105,6 +147,9 @@ const Cart = () => {
             </div>
           </div>
         </div>
+      
+
+
       </Container>
     </div>
   );
