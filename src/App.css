@@ -985,6 +985,15 @@ footer .input-group-text {
   background: #fdce91;
 }
 
+.Category_Product:hover{
+    cursor: pointer;
+   
+}
+
+.Category_Product:hover h6{
+  color: green;
+}
+
 .border_data{
   border: 1px solid lightgray;
 }
@@ -996,6 +1005,17 @@ footer .input-group-text {
 
 .profile_active{
   background: rgb(236, 235, 235);
+}
+
+.Update_Profile{
+  border: 2px dashed gray;
+  padding: 10px 10px;
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .dashbord_Icon{

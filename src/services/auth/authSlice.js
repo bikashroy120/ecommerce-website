@@ -7,10 +7,14 @@ const getUserfromLocalStorage = localStorage.getItem("user")
   : null;
 const initialState = {
   user: getUserfromLocalStorage,
+  filter:"",
   isError: false,
   isLoading: false,
   isSuccess: false,
   message: "",
+  sError:false,
+  sLoadding:false,
+  Ssuccess:false
 };
 
 
@@ -40,7 +44,11 @@ export const register = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    subCata(state, action) {
+      state.filter = action.payload;
+    },
+  },
   extraReducers: (buildeer) => {
     buildeer
       .addCase(login.pending, (state) => {
@@ -68,20 +76,24 @@ export const authSlice = createSlice({
         }
       })
       .addCase(register.pending, (state) => {
-        state.isLoading = true;
+        state.sLoadding = true;
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.isError = false;
-        state.isLoading = false;
-        state.isSuccess = true;
-        // state.user = action.payload;
+        state.sError = false;
+        state.sLoadding = false;
+        state.Ssuccess = true;
+        state.singup = action.payload;
         state.message = "success";
+        state.user = action.payload;
+        if(state.Ssuccess){
+          localStorage.setItem("user", JSON.stringify(action.payload));
+        }
       })
       .addCase(register.rejected, (state, action) => {
-        state.isError = true;
-        state.isSuccess = false;
+        state.sError = true;
+        state.Ssuccess = false;
         state.message = action.error;
-        state.isLoading = false;
+        state.sLoadding = false;
       })
   },
 });

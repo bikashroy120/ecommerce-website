@@ -8,6 +8,7 @@ import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { cartActions } from "../services/card/cardSlice";
+import { image_url } from "../utils/baseUrl";
 
 const Cart = () => {
   const [count,setCount] = useState(1)
@@ -58,7 +59,7 @@ const Cart = () => {
                   <div key={1} className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
                   <div className="cart-col-1 gap-15 d-flex align-items-center">
                     <div className="w-25">
-                      <img src={`http://localhost:5000/uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
+                      <img src={`${image_url}uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
                     </div>
                     <div className="w-75">
                       <p>{item.productname}</p>
@@ -99,7 +100,7 @@ const Cart = () => {
                                 <div key={1} className=" mb-4">
                                 <div className=" gap-15 d-flex align-items-center">
                                   <div style={{width:"25%"}}>
-                                    <img src={`http://localhost:5000/uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
+                                    <img src={`${image_url}uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
                                   </div>
                                   <div style={{width:"75%"}}>
                                     <p style={{fontSize:"14px"}}>{item.productname?.slice(0,35)}</p>

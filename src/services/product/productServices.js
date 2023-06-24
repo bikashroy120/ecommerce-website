@@ -25,12 +25,18 @@ const getWishlist = async()=>{
     return res.data.wishlist
 }
 
+const getCategory = async()=>{
+    const res = await axios.get(`${base_url}/product-category`,config)
+    return res.data
+}
+
 
 const productServices = {
     getProduct,
     getSingalProduct,
     creactWishlist,
     getWishlist,
+    getCategory,
   };
   
   export default productServices;

@@ -1,30 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct } from "../services/product/productSlice";
+import { getProduct, getProductCategory } from "../services/product/productSlice";
 import ProductCardHome from "../components/ProductCardHome";
 import Countdown from "react-countdown";
 import HomeSlyder from "../components/HomeSlyder";
+import { image_url } from "../utils/baseUrl";
+import { cartActions } from "../services/card/cardSlice";
 // import { services } from "../utils/Data";
 
 const Home = () => {
 
   const [grid, setGrid] = useState(3);
-  const {product} = useSelector((state)=>state.product)
+  const {product,caregory} = useSelector((state)=>state.product)
   const dispacth = useDispatch()
+  const navigate =  useNavigate()
 
   const fachtProduct = ()=>{
     dispacth(getProduct())
   }
 
+  const factecCategory = ()=>{
+    dispacth(getProductCategory())
+  }
+
+  console.log(caregory)
+
+  const gsidid = (item)=>{
+    dispacth(cartActions.setFilter(item))
+    navigate("/product")
+  }
 
   useEffect(()=>{
     fachtProduct()
+    factecCategory()
   },[])
 
   const Completionist = () => <span>You are good to go!</span>;
@@ -138,46 +152,18 @@ const Home = () => {
         <div className="row">
           <div className="col-12">
             <div className="categories flex-wrap align-items-center">
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
-              <div className="d-flex gap flex-column align-items-center">
-              <img className="category_image" src="images/camera.jpg" alt="camera" />
-                  <h6>Music & Gaming</h6>
-                
-              </div>
+              {
+                caregory?.map((item,i)=>{
+                  return(
+                    <div key={i} onClick={()=>gsidid(item.title)} className="d-flex gap flex-column align-items-center Category_Product">
+                        <img className="category_image" src={`${image_url}uploads/${item.image}`} style={{width:"100px",height:"100px"}} alt="camera" />
+                        <h6>{item.title}</h6>
+                      
+                    </div>
+                  )
+                })
+              }
+
             </div>
           </div>
         </div>
@@ -198,7 +184,7 @@ const Home = () => {
 
       <div className="products-list pb-5">
               <div className="home_product">
-                <ProductCardHome grid={grid} product={product}/>
+                <ProductCardHome grid={grid} product={product?.slice(5,10)}/>
               </div>
             </div>
 
@@ -237,7 +223,7 @@ const Home = () => {
 
       </Container>
 
-      {/* <Container class1="marque-wrapper home-wrapper-2 py-5">
+      <Container class1="marque-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
             <div className="marquee-inner-wrapper card-wrapper">
@@ -270,29 +256,29 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container> */}
+      </Container>
 
-      {/* <Container class1="blog-wrapper py-5 home-wrapper-2">
+      <Container class1="blog-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Our Latest Blogs</h3>
           </div>
         </div>
         <div className="row">
-          <div className="col-3">
+          <div className="col-12 col-md-6 col-lg-3">
             <BlogCard />
           </div>
-          <div className="col-3">
+          <div className="col-12 col-md-6 col-lg-3">
             <BlogCard />
           </div>
-          <div className="col-3">
+          <div className="col-12 col-md-6 col-lg-3">
             <BlogCard />
           </div>
-          <div className="col-3">
+          <div className="col-12 col-md-6 col-lg-3">
             <BlogCard />
           </div>
         </div>
-      </Container> */}
+      </Container>
     </>
   );
 };

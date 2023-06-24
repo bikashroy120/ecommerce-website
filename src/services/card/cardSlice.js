@@ -6,6 +6,7 @@ const cartSlice = createSlice({
     totalQuantity: 0,
     showCart: false,
     subtotal: 0,
+    filter:""
   },
   reducers: {
     clearcart(state, action) {
@@ -96,6 +97,9 @@ const cartSlice = createSlice({
 
     setShowCart(state) {
       state.showCart = !state.showCart;
+    },
+    setFilter(state, action) {
+      state.filter = action.payload;
     },
   },
 });

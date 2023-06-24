@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { cartActions } from "../services/card/cardSlice";
 import {BsBagPlusFill} from "react-icons/bs"
 import {AiTwotoneHeart} from "react-icons/ai"
+import { image_url } from "../utils/baseUrl";
 const ProductCard = (props) => {
   const { grid,product } = props;
   console.log(product);
@@ -96,7 +97,7 @@ const ProductCard = (props) => {
                 </div>
                 <div className="product-image">
                 <Link to={`/product/${item._id}`}>
-                  <img src={'http://localhost:5000/uploads/'+item.images[0]} className="img-fluid" alt="product image" />
+                  <img src={item.images[0] ? image_url+'uploads/'+item.images[0] :"images/2748558.png"} className="img-fluid" alt="product image" />
                  </Link>
                 </div>
                 <div className="product-details">

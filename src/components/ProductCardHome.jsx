@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { cartActions } from "../services/card/cardSlice";
 import {BsBagPlusFill} from "react-icons/bs"
 import {AiTwotoneHeart} from "react-icons/ai"
+import { image_url } from "../utils/baseUrl";
 const ProductCardHome = (props) => {
   const { grid,product } = props;
   console.log(product);
@@ -98,12 +99,12 @@ const ProductCardHome = (props) => {
                   </button>
                 </div>
                 <div className="product-image">
-                 <Link to={`product/${item._id}`}>
-                  <img src={'http://localhost:5000/uploads/'+item.images[0]} className="img-fluid" alt="product image" />
+                 <Link to={`/product/${item._id}`}>
+                  <img src={item.images[0] ? image_url+'uploads/'+item.images[0] :"images/2748558.png"} className="img-fluid" alt="product image" />
                  </Link>
                 </div>
                 <div className="product-details">
-                  <h6 className="brand">Havels</h6>
+                  <h6 className="brand">{item.brand.title}</h6>
                   <h5 className="product-title" style={{height:"45px",width:"100%"}}>
                     {item.title.slice(0,30)}...
                   </h5>

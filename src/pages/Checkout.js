@@ -13,7 +13,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
 import { config } from "../utils/axiosconfig";
-import { base_url } from "../utils/baseUrl";
+import { base_url, image_url } from "../utils/baseUrl";
 import { creactOrder } from "../services/profile/profileSlice";
 
 
@@ -396,7 +396,7 @@ const Checkout = () => {
                           <div className="d-flex gap-10 align-align-items-center">
                             <div className="w-75 d-flex align-items-center gap-10">
                               <div className="w-25 position-relative">
-                                <img className="img-fluid" src={`http://localhost:5000/uploads/${item.feature_image}`} alt="product" />
+                                <img className="img-fluid" src={`${image_url}uploads/${item.feature_image}`} alt="product" />
                               </div>
                               <div>
                               <p>{item.productname.slice(0,40)}</p>

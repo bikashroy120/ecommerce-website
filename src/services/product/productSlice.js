@@ -7,6 +7,7 @@ import productServices from "./productServices";
 const initialState = {
     product:[],
     Singalproduct:{},
+    caregory:[],
     wishlist:[],
     isError: false,
     isLoading: false,
@@ -49,6 +50,16 @@ const initialState = {
     "product/getWishlist",async(thunkAPI)=>{
         try {
             return await productServices.getWishlist()
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+  )
+
+  export const getProductCategory = createAsyncThunk(
+    "product/getProductCategory",async(thunkAPI)=>{
+        try {
+            return await productServices.getCategory()
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
         }
@@ -110,6 +121,19 @@ const initialState = {
             state.isSuccess=true;
             state.wishlist=action.payload;
         }).addCase(getWishlist.rejected,(state,action)=>{
+            state.isLoading=false;
+            state.isError=true;
+            state.isSuccess=false;
+        })
+        .addCase(getProductCategory.pending,(state)=>{
+            state.isLoading=true
+        })
+        .addCase(getProductCategory.fulfilled,(state,action)=>{
+            state.isLoading=false;
+            state.isError=false;
+            state.isSuccess=true;
+            state.caregory=action.payload;
+        }).addCase(getProductCategory.rejected,(state,action)=>{
             state.isLoading=false;
             state.isError=true;
             state.isSuccess=false;

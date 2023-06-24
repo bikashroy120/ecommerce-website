@@ -420,7 +420,7 @@ const SingleProduct = () => {
             <h3 className="section-heading">Our Popular Products</h3>
             <div className="products-list pb-5">
               <div className="home_product">
-                <ProductCardHome grid={grid} product={product}/>
+                <ProductCardHome grid={grid} product={product?.slice(3,8)}/>
               </div>
         </div>
           </div>

@@ -4,10 +4,15 @@ import Meta from "../components/Meta";
 import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {register } from "../services/auth/authSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Signup = () => {
+  const {singup, sError,sLoadding,Ssuccess} = useSelector((state)=>state.auth)
   const dispatch = useDispatch()
+  const navigate =  useNavigate()
   const [data,setData]=useState({
     fastname:"",
     lastname:"",
@@ -21,6 +26,20 @@ const signup = (e)=>{
   console.log(data)
   dispatch(register(data))
 }
+
+
+useEffect(()=>{
+
+  if(Ssuccess && singup){
+    navigate("/")
+    toast.success("Sing up success")
+  }
+
+  if(sError){
+    toast.error("error")
+  }
+
+},[singup,sError,sLoadding,Ssuccess])
 
 
   return (
@@ -58,7 +77,7 @@ const signup = (e)=>{
                 />
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button type="submit" onClick={signup} className="button border-0">Sign Up</button>
+                    <button type="submit" onClick={signup} className="button border-0">{sLoadding ? "Loadding..." :"Sign Up"}</button>
                   </div>
                 </div>
               </form>
@@ -69,5 +88,15 @@ const signup = (e)=>{
     </>
   );
 };
+
+{/* <ColorRing
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="blocks-loading"
+  wrapperStyle={{}}
+  wrapperClass="blocks-wrapper"
+  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+/> */}
 
 export default Signup;

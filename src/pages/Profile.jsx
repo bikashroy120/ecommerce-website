@@ -28,11 +28,11 @@ const Profile = () => {
             title:"Update Profile",
             icons:<FiSettings/>
         },
-        {
-            id:4,
-            title:"Change Password",
-            icons:<MdOutlineRequestPage/>
-        },
+        // {
+        //     id:4,
+        //     title:"Change Password",
+        //     icons:<MdOutlineRequestPage/>
+        // },
         {
             id:5,
             title:"Logout",

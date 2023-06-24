@@ -8,10 +8,12 @@ import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../services/product/productSlice";
 import { useEffect } from "react";
+import { cartActions } from "../services/card/cardSlice";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(3);
   const {product} = useSelector((state)=>state.product)
+  const {filter} = useSelector((state)=>state.cart)
   const [brand,setbrand] = useState([])
   const [category,setCategory] = useState([])
   const [select,setSelect]=useState([])
@@ -42,14 +44,14 @@ const OurStore = () => {
   },[product])
 
   useEffect(()=>{
-    if(filterCat===""){
+    if(filter===""){
       setUpdate(product)
     }else{
-      const  updataproduct = product.filter((item)=>item.category.title === filterCat)
+      const  updataproduct = product.filter((item)=>item.category.title === filter)
       setUpdate(updataproduct)
       setLast(updataproduct)
     }
-  },[product,filterCat])
+  },[product,filter])
 
   useEffect(()=>{
     let category = []
@@ -68,7 +70,7 @@ const OurStore = () => {
         }
       }
       setbrand(brandName)
-  },[filterCat,update])
+  },[filter,update])
 
 
   const fachtProduct = ()=>{
@@ -83,6 +85,7 @@ const OurStore = () => {
   // console.log(product)
   const categorySet = (item)=>{
     setFilterCat(item)
+    dispacth(cartActions.setFilter(item))
   }
 
 
@@ -117,11 +120,11 @@ console.log(last)
               <h3 className="filter-title">Shop By Categories</h3>
               <div>
                 <ul className=" ml-5">
-                  <li style={{fontSize:"17px"}} onClick={()=>categorySet("")} className={`${""===filterCat? " text-danger" : ""}`}>{"All"}</li>
+                  <li style={{fontSize:"17px"}} onClick={()=>categorySet("")} className={`${""===filter? " text-danger" : ""}`}>{"All"}</li>
                     {
                       category?.map((item,i)=>{
                         return(
-                          <li style={{fontSize:"17px"}} onClick={()=>categorySet(item)} className={`${item===filterCat? " text-danger" : ""}`} key={i}>{item}</li>
+                          <li style={{fontSize:"17px"}} onClick={()=>categorySet(item)} className={`${item===filter? " text-danger" : ""}`} key={i}>{item}</li>
                         )
                       })
                     }
