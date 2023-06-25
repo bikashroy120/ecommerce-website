@@ -16,6 +16,7 @@ import ProductCardHome from "../components/ProductCardHome";
 import { cartActions } from "../services/card/cardSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
+import { image_url } from "../utils/baseUrl";
 
 const SingleProduct = () => {
 
@@ -114,7 +115,7 @@ const SingleProduct = () => {
             <div className="main-product-image">
               <div>
                 {/* <ReactImageZoom {...props} /> */}
-                <img src={'http://localhost:5000/uploads/'+image} alt="image"/>
+                <img src={image_url+'uploads/'+image} alt="image"/>
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-15">
@@ -124,7 +125,7 @@ const SingleProduct = () => {
                     return(
                       <div key={i} onClick={()=>setImage(item)} style={{ borderColor:`${item===image ? "red" : ""}`,cursor:"pointer" }}>
                       <img
-                        src={'http://localhost:5000/uploads/'+item}
+                        src={image_url+'uploads/'+item}
                         className="img-fluid"
                         style={{height:"100px", width:"100px"}}
                         alt=""
