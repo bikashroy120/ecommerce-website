@@ -9,8 +9,11 @@ import { useState } from 'react'
 import Dashbord from '../components/profile/Dashbord'
 import Order from '../components/profile/Order'
 import UpdateProfile from '../components/profile/UpdateProfile'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Profile = () => {
+    const naviget =  useNavigate()
     const [profileActive,setprofileActive] = useState(1)
     const profileData = [
         {
@@ -33,12 +36,19 @@ const Profile = () => {
         //     title:"Change Password",
         //     icons:<MdOutlineRequestPage/>
         // },
-        {
-            id:5,
-            title:"Logout",
-            icons:<AiOutlineUnlock/>
-        },
+        // {
+        //     id:5,
+        //     title:"Logout",
+        //     icons:<AiOutlineUnlock/>
+        // },
     ]
+
+    const logOut = ()=>{
+        localStorage.clear()
+        naviget("/")
+        toast.success("Log out success")
+        window.location.reload()
+    }
 
 
   return (
@@ -57,6 +67,10 @@ const Profile = () => {
                                 )
                             })
                         }
+                    <div onClick={()=>logOut()} className={`d-flex align-content-center gap-2 p-3 rounded-3 profile_left_bg `}>
+                        <AiOutlineUnlock/>
+                        <h6 style={{margin:"0", padding:"0"}}>Logout</h6>
+                    </div>
                     </div>
                 </div>
                 <div className=' col-12 col-md-9 '>

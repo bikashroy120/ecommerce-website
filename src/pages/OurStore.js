@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../services/product/productSlice";
 import { useEffect } from "react";
 import { cartActions } from "../services/card/cardSlice";
+import Loader from "../components/Loader";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(3);
@@ -42,6 +43,8 @@ const OurStore = () => {
       setCategory(brandName)
       setUpdate(product)
   },[product])
+
+
 
   useEffect(()=>{
     if(filter===""){
@@ -108,7 +111,12 @@ useEffect(()=>{
   }
 },[select,update])
 
-console.log(last)
+
+if(product.length === 0){
+  return <Loader />
+}
+
+// console.log(last)
   return (
     <>
       <Meta title={"Our Store"} />

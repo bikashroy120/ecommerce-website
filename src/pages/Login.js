@@ -14,8 +14,8 @@ const {user,isSuccess,isLoading,message} = useSelector((state)=>state.auth)
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [data,setData]=useState({
-    email:"",
-    password:""
+    email:"bikash@gmail.com",
+    password:"123456"
   })
 
 const signup = (e)=>{

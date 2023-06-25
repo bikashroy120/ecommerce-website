@@ -10,3 +10,12 @@ export const config = {
     Accept: "application/json",
   },
 };
+
+export const config2 = {
+  headers: {
+    Authorization: `Bearer ${
+      getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+    }`,
+    Accept: "multipart/form-data",
+  },
+};

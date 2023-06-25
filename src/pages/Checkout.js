@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import watch from "../images/watch.jpg";
 import Container from "../components/Container";
@@ -34,10 +34,12 @@ let schema = yup.object().shape({
 const Checkout = () => {
   const cartItem = useSelector((state)=>state.cart.itemList)
   const subtotal = useSelector((state)=>state.cart.subtotal);
+  const {user} = useSelector((state)=>state.auth);
   const {order,isLoading,isSuccess} = useSelector((state)=>state.profile)
   const [dId,setDID] = useState()
   const [cId,setCID] = useState()
   const [total,setTotle]=useState()
+  const navegate =  useNavigate()
   const dalevary = [
     {
       id:1,
@@ -104,8 +106,19 @@ const Checkout = () => {
   },[dId,cId,total,cartItem])
 
   useEffect(()=>{
-    localStorage.removeItem("cartdata")
+    if(isSuccess && order){
+      navegate(`/order/${order._id}`)
+      localStorage.removeItem("cartdata")
+    }
   },[isSuccess,order])
+
+
+  useEffect(()=>{
+    formik.values.FirstName = user.firstname
+    formik.values.email = user.email
+    formik.values.phone = user.mobile
+    formik.values.LastName = user.lastname
+  },[user])
 
   // const CreactOrder = async(data)=>{
   //   const res = await axios.post(`${base_url}/user/add-order`,data,config)
@@ -136,6 +149,7 @@ const Checkout = () => {
       dispacth(creactOrder(values))
     },
   });
+
 
 
 
@@ -369,12 +383,15 @@ const Checkout = () => {
 
                 <div className="w-100">
                   <div className="d-flex justify-content-between align-items-center">
-                    <Link to="/cart" className="text-dark">
+                    <Link to="/" className="text-dark">
                       <BiArrowBack className="me-2" />
-                      Return to Cart
+                      countnew shoping
                     </Link>
                     <button type="submit" className="button">
-                      Order
+                      {
+                        isLoading ? "loadding.." :" Order"
+                      }
+                     
                     </button>
                   </div>
 

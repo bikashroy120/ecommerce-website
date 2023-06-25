@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { creactWishlist, getWishlist} from "../services/product/productSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { image_url } from "../utils/baseUrl";
 
 const Wishlist = () => {
   const dispacth = useDispatch()
@@ -17,17 +18,18 @@ const Wishlist = () => {
         proId:id
       }
       dispacth(creactWishlist(data))
+      toast.success("SuccessFully remove wishlist")
     }
 
     useEffect(()=>{
       dispacth(getWishlist())
     },[wishadd,dispacth])
   
-    useEffect(()=>{
-      if(wishadd && isSuccess){
-        toast.success("SuccessFully remove wishlist")
-      }
-    },[wishadd,isSuccess])
+    // useEffect(()=>{
+    //   if(wishadd && isSuccess){
+    //     toast.success("SuccessFully remove wishlist")
+    //   }
+    // },[wishadd,isSuccess])
 
     console.log(wishlist)
 
@@ -60,7 +62,7 @@ const Wishlist = () => {
                   />
                   <div className="wishlist-card-image">
                     <img
-                      src={'http://localhost:5000/uploads/'+item.images[1]}
+                      src={item.images[0] ? image_url+'uploads/'+item.images[0] :"images/2748558.png"}
                       className="img-fluid w-100"
                       alt="watch"
                     />

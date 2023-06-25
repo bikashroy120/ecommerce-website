@@ -34,24 +34,25 @@ const ProductCardHome = (props) => {
       if(user){
         const stttt = wishlist.find((ite)=>ite._id===id)
         if(stttt){
-          toast.error("already add wishlist !")
+          // toast.error("already add wishlist !")
         }else{
           dispacth(creactWishlist(data))
         }
       }else{
         navigate("/login")
       }
+      toast.success("SuccessFully add wishlist")
   }
 
   useEffect(()=>{
     dispacth(getWishlist())
   },[wishadd])
 
-  useEffect(()=>{
-    if(wishadd && isSuccess){
-      toast.error("product not abalable")
-    }
-  },[wishadd,isSuccess])
+  // useEffect(()=>{
+  //   if(wishadd && isSuccess){
+  //     toast.error("product not abalable")
+  //   }
+  // },[wishadd,isSuccess])
 
 
   const addToCart = (product) =>{

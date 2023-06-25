@@ -15,6 +15,7 @@ import { getProduct, getSingalProduct } from "../services/product/productSlice";
 import ProductCardHome from "../components/ProductCardHome";
 import { cartActions } from "../services/card/cardSlice";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const SingleProduct = () => {
 
@@ -98,6 +99,11 @@ const SingleProduct = () => {
     textField.remove();
   };
   const closeModal = () => {};
+
+  if(!Singalproduct){
+    return <Loader />
+  }
+
   return (
     <>
       <Meta title={Singalproduct?.title} />

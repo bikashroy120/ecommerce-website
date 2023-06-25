@@ -3,22 +3,25 @@ import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../images/compare.svg";
 import wishlist from "../images/wishlist.svg";
-import user from "../images/user.svg";
+import users from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {AiOutlineHome} from "react-icons/ai"
 import { useEffect } from "react";
 import { cartActions } from "../services/card/cardSlice";
+import { image_url } from "../utils/baseUrl";
 const Header = () => {
 
   const cartItem = useSelector((state)=>state.cart.itemList)
   const subtotal = useSelector((state)=>state.cart.subtotal);
+  const {user} = useSelector((state)=>state.auth);
   const dispatch = useDispatch()
 
   useEffect(()=>{
     dispatch(cartActions.getTotals())
   },[cartItem])
+  console.log(user)
 
   return (
     <>
@@ -78,17 +81,35 @@ const Header = () => {
                     </p> */}
                   </Link>
                 </div>
-                <div>
-                  <Link
-                    to="/login"
-                    className="d-flex align-items-center gap-10 text-white"
-                  >
-                    <img src={user} alt="user" />
-                    {/* <p className="mb-0">
-                      Log in <br /> My Account
-                    </p> */}
-                  </Link>
-                </div>
+                
+                {
+                  user ? (
+                    <div>
+                    <Link
+                      to="/profile"
+                      className="d-flex align-items-center gap-10 text-white"
+                    >
+                      <img src={user.image ? image_url+'uploads/'+user.image : "images/user.jpg"} style={{width:"40px", height:"40px",borderRadius:"50%"}} alt="user" />
+                      {/* <p className="mb-0">
+                        Log in <br /> My Account
+                      </p> */}
+                    </Link>
+                  </div>
+                  ):(
+                    <div>
+                    <Link
+                      to="/login"
+                      className="d-flex align-items-center gap-10 text-white"
+                    >
+                      <img src={users} alt="user" />
+                      {/* <p className="mb-0">
+                        Log in <br /> My Account
+                      </p> */}
+                    </Link>
+                  </div>
+                  )
+                }
+
                 <div>
                   <Link
                     to="/cart"
@@ -199,17 +220,33 @@ const Header = () => {
                     </p> */}
                   </Link>
                 </div>
-                <div>
-                  <Link
-                    to="/login"
-                    className="d-flex align-items-center gap-10 text-white"
-                  >
-                    <img src={user} alt="user" />
-                    {/* <p className="mb-0">
-                      Log in <br /> My Account
-                    </p> */}
-                  </Link>
-                </div>
+                {
+                  user ? (
+                    <div>
+                    <Link
+                      to="/profile"
+                      className="d-flex align-items-center gap-10 text-white"
+                    >
+                      <img src={user.image ? image_url+'uploads/'+user.image : "images/user.jpg"} style={{width:"40px", height:"40px",borderRadius:"50%"}} alt="user" />
+                      {/* <p className="mb-0">
+                        Log in <br /> My Account
+                      </p> */}
+                    </Link>
+                  </div>
+                  ):(
+                    <div>
+                    <Link
+                      to="/login"
+                      className="d-flex align-items-center gap-10 text-white"
+                    >
+                      <img src={users} alt="user" />
+                      {/* <p className="mb-0">
+                        Log in <br /> My Account
+                      </p> */}
+                    </Link>
+                  </div>
+                  )
+                }
                 <div>
                   <Link
                     to="/cart"

@@ -34,13 +34,14 @@ const ProductCard = (props) => {
       if(user){
         const stttt = wishlist.find((ite)=>ite._id===id)
         if(stttt){
-          toast.error("already add wishlist !")
+          // toast.error("already add wishlist !")
         }else{
           dispacth(creactWishlist(data))
         }
       }else{
         navigate("/login")
       }
+      toast.success("SuccessFully add wishlist")
   }
 
   const addToCart = (product) =>{
@@ -64,11 +65,11 @@ const ProductCard = (props) => {
     dispacth(getWishlist())
   },[wishadd])
 
-  useEffect(()=>{
-    if(wishadd && isSuccess){
-      toast.success("SuccessFully add wishlist")
-    }
-  },[wishadd,isSuccess])
+  // useEffect(()=>{
+  //   if(wishadd && isSuccess){
+  //     toast.success("SuccessFully add wishlist")
+  //   }
+  // },[wishadd,isSuccess])
 
   return (
     <>

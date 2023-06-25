@@ -12,6 +12,7 @@ import Countdown from "react-countdown";
 import HomeSlyder from "../components/HomeSlyder";
 import { image_url } from "../utils/baseUrl";
 import { cartActions } from "../services/card/cardSlice";
+import Loader from "../components/Loader";
 // import { services } from "../utils/Data";
 
 const Home = () => {
@@ -57,6 +58,11 @@ const Home = () => {
       );
     }
   };
+
+
+  if(product.length === 0){
+    return <Loader />
+  }
 
 
 

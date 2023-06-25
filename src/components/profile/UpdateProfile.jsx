@@ -1,9 +1,36 @@
+import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { FiUploadCloud } from 'react-icons/fi'
+import { base_url, image_url } from '../../utils/baseUrl'
+import { config2 } from '../../utils/axiosconfig'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const UpdateProfile = () => {
   const [file,setfile] = useState()
+  const [profile,setProfile] = useState()
+  const {user} = useSelector((state)=>state.auth);
+  const [firstname,setFirstName] = useState("")
+  const [lastname,setlastname] = useState("")
+  const [mobile ,setmobile] = useState("")
+  const [city,setcity] = useState("")
+
+  const updateProfile = async()=>{
+      const res = await axios.post(`${base_url}/user/one`,config2)
+      setProfile(res)
+  }
+
+  console.log(user)
+
+  useEffect(()=>{
+    setFirstName(user?.firstname)
+    setlastname(user?.lastname)
+    setmobile(user?.mobile)
+    setcity(user?.city)
+  },[user])
+
+
   return (
     <>
 
@@ -20,7 +47,8 @@ const UpdateProfile = () => {
                 </label>
                 <div style={{height:"80px"}}>
                     {
-                      file ? <img src={URL.createObjectURL(file)} alt="" style={{width:"80px" ,height:"60px"}} /> : null
+                      file ? <img src={URL.createObjectURL(file)} alt="" style={{width:"80px" ,height:"60px"}} /> : 
+                      <img src={user.image ? image_url+'uploads/'+user.image : "images/user.jpg"} style={{width:"80px" ,height:"60px"}} alt="user" />
                     }
                 </div>
                 </div>
@@ -33,6 +61,8 @@ const UpdateProfile = () => {
                         placeholder="Jone"
                         className="form-control"
                         name="FirstName"
+                        value={firstname}
+                        onChange={(e)=>setFirstName(e.target.value)}
                       />
 
                     </div>
@@ -43,6 +73,8 @@ const UpdateProfile = () => {
                         placeholder="Deo"
                         className="form-control"
                         name="LastName"
+                        value={lastname}
+                        onChange={(e)=>setlastname(e.target.value)}
                       />
                     </div>
                   </div>
@@ -54,6 +86,8 @@ const UpdateProfile = () => {
                         placeholder="City"
                         className="form-control"
                         name="FirstName"
+                        value={city}
+                        onChange={(e)=>setcity(e.target.value)}
                       />
 
                     </div>
@@ -64,9 +98,17 @@ const UpdateProfile = () => {
                         placeholder="Phone"
                         className="form-control"
                         name="LastName"
+                        value={mobile}
+                        onChange={(e)=>setmobile(e.target.value)}
                       />
                     </div>
+
+
+
                   </div>
+                  <button type='submit' className='py-2 px-5' style={{border:"none", background:"green",color:"#fff",borderRadius:"10px"}}>
+                      Update
+                    </button>
                 </form>
             </div>
         </div>
