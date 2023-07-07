@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ReactStars from "react-rating-stars-component";
@@ -22,6 +22,9 @@ const OurStore = () => {
   const [update,setUpdate]=useState([])
   const [last,setLast]=useState([])
   const dispacth = useDispatch()
+  const [min, setMin] = useState()
+  const [mix, setMix] = useState()
+  const [HiLow, setHiLow] = useState('')
 
   useEffect(()=>{
     let category = []
@@ -89,6 +92,8 @@ const OurStore = () => {
   const categorySet = (item)=>{
     setFilterCat(item)
     dispacth(cartActions.setFilter(item))
+    setMin("")
+    setMix("")
   }
 
 
@@ -110,6 +115,34 @@ useEffect(()=>{
     setLast(last)
   }
 },[select,update])
+
+const priceHandel =()=>{
+ 
+  let updatedList = update.filter(
+    (item) => item.price >= min && item.price <= mix
+  );
+
+  setLast(updatedList)
+}
+
+const LowHiPrice = ()=>{
+ 
+  const sortedProducts = [...update].sort((a, b) => {
+    if (HiLow==="dec") {
+      return a.price - b.price; // Low to high (ascending) order
+    } else {
+      return b.price - a.price; // High to low (descending) order
+    }
+  });
+
+  setLast(sortedProducts);
+    
+}
+
+
+useEffect(()=>{
+  LowHiPrice()
+},[HiLow])
 
 
 if(product.length === 0){
@@ -176,6 +209,8 @@ if(product.length === 0){
                       className="form-control"
                       id="floatingInput"
                       placeholder="From"
+                      onChange={(e)=>setMin(e.target.value)}
+                      value={min}
                     />
                     <label htmlFor="floatingInput">From</label>
                   </div>
@@ -185,8 +220,15 @@ if(product.length === 0){
                       className="form-control"
                       id="floatingInput1"
                       placeholder="To"
+                      onChange={(e)=>setMix(e.target.value)}
+                      value={mix}
                     />
                     <label htmlFor="floatingInput1">To</label>
+                  </div>
+                  <div className="product_read_more_button" style={{marginTop:0,paddingTop:"0px"}}>
+                      {
+                        mix === "" ? null : <button onClick={()=>priceHandel()}>go</button>
+                      }
                   </div>
                 </div>
               </div>
@@ -269,20 +311,15 @@ if(product.length === 0){
                   </p>
                   <select
                     name=""
-                    defaultValue={"manula"}
+                    defaultValue={"def"}
                     className="form-control form-select"
                     id=""
+                    onChange={(e)=>setHiLow(e.target.value)}
+                    value={HiLow}
                   >
-                    <option value="manual">Featured</option>
-                    <option value="best-selling">Best selling</option>
-                    <option value="title-ascending">Alphabetically, A-Z</option>
-                    <option value="title-descending">
-                      Alphabetically, Z-A
-                    </option>
-                    <option value="price-ascending">Price, low to high</option>
-                    <option value="price-descending">Price, high to low</option>
-                    <option value="created-ascending">Date, old to new</option>
-                    <option value="created-descending">Date, new to old</option>
+                      <option value="def">Price</option>
+                      <option value="dec">Price: Low to high</option>
+                      <option value="inc">Price: High to low</option>
                   </select>
                 </div>
                 <div className="d-flex align-items-center gap-10 hide_item">

@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSingalOrder } from '../services/profile/profileSlice'
 import Table from '../components/Table'
+import { image_url } from '../utils/baseUrl'
 
 
 
@@ -21,7 +22,7 @@ const SingalOrder = () => {
     const columns = [
         {
             name: 'SR.',
-            selector: row => <img src={`http://localhost:5000/uploads/${row.feature_image}`} className='' style={{width:"40px", height:"40px",borderRadius:"50%"}} ></img>,
+            selector: row => <img src={`${image_url}uploads/${row.feature_image}`} className='' style={{width:"40px", height:"40px",borderRadius:"50%"}} ></img>,
             center:true,
             width: "150px"   
         },
