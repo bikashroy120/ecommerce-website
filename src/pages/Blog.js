@@ -11,7 +11,7 @@ const Blog = () => {
       <BreadCrumb title="Blogs" />
       <Container class1="blog-wrapper home-wrapper-2 py-5">
         <div className="row">
-          <div className="col-md-3 col-12">
+          {/* <div className="col-md-3 col-12">
             <div className="filter-card mb-3">
               <h3 className="filter-title">Find By Categories</h3>
               <div>
@@ -23,8 +23,8 @@ const Blog = () => {
                 </ul>
               </div>
             </div>
-          </div>
-          <div className="col-md-9 col-12">
+          </div> */}
+          <div className="col-md-12 col-12">
             <div className="row">
               <div className="col-md-6 col-12 mb-3">
                 <BlogCard />

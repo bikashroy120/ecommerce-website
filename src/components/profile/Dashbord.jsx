@@ -10,14 +10,10 @@ import { getDashbord } from '../../services/profile/profileSlice'
 
 const Dashbord = () => {
 {/* <img src={`http://localhost:5000/uploads/${row.feature_image}`} className='' style={{width:"40px", height:"40px",borderRadius:"50%"}} ></img> */}
-        const dispacth = useDispatch()
+        
         const {dashbord} = useSelector((state)=>state.profile)
 
-        console.log(dashbord)
 
-        useEffect(()=>{
-            dispacth(getDashbord())
-        },[dispacth])
 
 const columns = [
         {

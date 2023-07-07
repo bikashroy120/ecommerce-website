@@ -20,7 +20,7 @@ const Home = () => {
   const [grid, setGrid] = useState(3);
   const {product,caregory} = useSelector((state)=>state.product)
   const [finalProduct,setFinalProduct] = useState([])
-  const [count,setcount] = useState(5)
+  const [count,setcount] = useState(15)
   const dispacth = useDispatch()
   const navigate =  useNavigate()
 
@@ -149,6 +149,11 @@ const Home = () => {
           product.length === 0? <Loader /> : <>
 
       <Container class1="home-wrapper-2 py-5">
+      <div className="home_product_top">
+          <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+          <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Product Categorie</h2>
+          </div>
+      </div>
         <div className="row">
           <div className="col-12">
             <div className="categories flex-wrap align-items-center">

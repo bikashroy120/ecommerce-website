@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../images/compare.svg";
 import wishlist from "../images/wishlist.svg";
@@ -17,11 +17,18 @@ const Header = () => {
   const subtotal = useSelector((state)=>state.cart.subtotal);
   const {user} = useSelector((state)=>state.auth);
   const dispatch = useDispatch()
+  const {caregory} = useSelector((state)=>state.product)
+  const navigate =  useNavigate()
 
   useEffect(()=>{
     dispatch(cartActions.getTotals())
   },[cartItem])
-  console.log(user)
+
+
+  const gsidid = (item)=>{
+    dispatch(cartActions.setFilter(item))
+    navigate("/product")
+  }
 
   return (
     <>
@@ -150,21 +157,18 @@ const Header = () => {
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
-                      <li>
-                        <Link className="dropdown-item text-white" to="">
-                          Action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="">
-                          Another action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="">
-                          Something else here
-                        </Link>
-                      </li>
+
+                      {
+                        caregory?.map((item,i)=>{
+                          return(
+                            <li key={i} onClick={()=>gsidid(item.title)}>
+                            <Link className="dropdown-item text-white" to="">
+                              {item.title}
+                            </Link>
+                          </li>
+                          )
+                        })
+                      }
                     </ul>
                   </div>
                 </div>

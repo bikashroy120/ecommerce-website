@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {RxDashboard} from "react-icons/rx"
 import {GrUnorderedList} from "react-icons/gr"
 import {FiSettings} from "react-icons/fi"
@@ -11,9 +11,12 @@ import Order from '../components/profile/Order'
 import UpdateProfile from '../components/profile/UpdateProfile'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { getDashbord } from '../services/profile/profileSlice'
 
 const Profile = () => {
     const naviget =  useNavigate()
+    const dispacth = useDispatch()
     const [profileActive,setprofileActive] = useState(1)
     const profileData = [
         {
@@ -42,6 +45,10 @@ const Profile = () => {
         //     icons:<AiOutlineUnlock/>
         // },
     ]
+
+    useEffect(()=>{
+        dispacth(getDashbord())
+    },[dispacth])
 
     const logOut = ()=>{
         localStorage.clear()
