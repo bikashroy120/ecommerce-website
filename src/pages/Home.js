@@ -19,6 +19,8 @@ const Home = () => {
 
   const [grid, setGrid] = useState(3);
   const {product,caregory} = useSelector((state)=>state.product)
+  const [finalProduct,setFinalProduct] = useState([])
+  const [count,setcount] = useState(5)
   const dispacth = useDispatch()
   const navigate =  useNavigate()
 
@@ -42,6 +44,13 @@ const Home = () => {
     factecCategory()
   },[])
 
+
+  useEffect(()=>{
+    if(count){
+      setFinalProduct(product.slice(0,count))
+    }
+  },[count,product])
+
   const Completionist = () => <span>You are good to go!</span>;
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -60,9 +69,9 @@ const Home = () => {
   };
 
 
-  if(product.length === 0){
-    return <Loader />
-  }
+  // if(product.length === 0){
+  //   return <Loader />
+  // }
 
 
 
@@ -135,25 +144,10 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      {/* <Container class1="home-wrapper-2 py-5">
-        <div className="row">
-          <div className="col-12">
-            <div className="servies d-flex align-items-center justify-content-between">
-              {services?.map((i, j) => {
-                return (
-                  <div className="d-flex align-items-center gap-15" key={j}>
-                    <img src={i.image} alt="services" />
-                    <div>
-                      <h6>{i.title}</h6>
-                      <p className="mb-0">{i.tagline}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </Container> */}
+
+      {
+          product.length === 0? <Loader /> : <>
+
       <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
@@ -196,23 +190,6 @@ const Home = () => {
 
       </Container>
 
-      {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
-      <div className="home_product_top">
-          <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
-          <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Special Products</h2>
-          </div>
-          <div>
-            <button>See More</button>
-          </div>
-      </div>
-
-      <div className="products-list pb-5">
-              <div className="home_product">
-                <ProductCardHome grid={grid} product={product}/>
-              </div>
-            </div>
-
-      </Container> */}
 
       <Container class1="featured-wrapper py-2 home-wrapper-2">
       <div className="home_product_top">
@@ -223,7 +200,12 @@ const Home = () => {
 
       <div className="products-list pb-5">
               <div className="home_product">
-                <ProductCardHome grid={grid} product={product}/>
+                <ProductCardHome grid={grid} product={finalProduct}/>
+              </div>
+              <div className="product_read_more_button">
+                {
+                 product.length !== finalProduct.length ?  <button onClick={()=>setcount((pre)=>pre+15)}>Read More</button>:null
+                }
               </div>
         </div>
 
@@ -285,6 +267,9 @@ const Home = () => {
           </div>
         </div>
       </Container>
+          
+          </>
+      }
     </>
   );
 };
