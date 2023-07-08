@@ -114,10 +114,10 @@ const Checkout = () => {
 
 
   useEffect(()=>{
-    formik.values.FirstName = user.firstname
-    formik.values.email = user.email
-    formik.values.phone = user.mobile
-    formik.values.LastName = user.lastname
+    formik.values.FirstName = user?.firstname
+    formik.values.email = user?.email
+    formik.values.phone = user?.mobile
+    formik.values.LastName = user?.lastname
   },[user])
 
   // const CreactOrder = async(data)=>{
@@ -150,8 +150,12 @@ const Checkout = () => {
     },
   });
 
-
-
+  useEffect(()=>{
+    if(!user){
+      navegate("/login")
+    }
+  },[user])
+  
 
   return (
     <div className="container_margin_top">
