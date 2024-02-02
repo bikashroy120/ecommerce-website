@@ -65,7 +65,7 @@ a {
 } */
 
 .jfjfjfjjfjfjjf{
-  margin-top: 160px;
+  margin-top: 180px;
 }
 
 .header-top-strip {
@@ -140,9 +140,24 @@ footer .input-group-text {
 /* Footer Part Ends Here */
 
 /* Home Page */
+
+.banner_image{
+  width: 100%;
+  height: 450px;
+}
+
+.sit_banner_main{
+  height: 216px;
+}
+
+.sid_banner{
+  top: 20%;
+  left: 10%;
+}
+
 .main-banner-content {
-  top: 15%;
-  left: 5%;
+  top: 20%;
+  left: 10%;
 }
 .main-banner-content h4 {
   font-size: 16px;
@@ -1017,7 +1032,7 @@ footer .input-group-text {
   width: 100%;
   height: 100%;
   z-index: 99999999999999999;
-  background: rgba(0, 0, 0, 0.8);
+  background: white;
 }
 
 .product_read_more_button{
@@ -1100,6 +1115,19 @@ footer .input-group-text {
 @media only screen and (max-width: 1023px) {
   .header_main{
     display: none;
+  }
+
+  .banner_image{
+    width: 100%;
+    height: 270px;
+  }
+  
+  .sit_banner_main{
+    height: 156px;
+  }
+
+  .jfjfjfjjfjfjjf{
+    margin-top: 75px;
   }
 
   .mobile_nav_top{
