@@ -17,6 +17,8 @@ import { image_url } from "../utils/baseUrl";
 import { cartActions } from "../services/card/cardSlice";
 import Loader from "../components/Loader";
 import Banner from "../components/homePage/Banner";
+import ProductCategory from "../components/homePage/ProductCategory";
+import FlashDeals from "../components/homePage/FlashDeals";
 // import { services } from "../utils/Data";
 
 const Home = () => {
@@ -53,97 +55,12 @@ const Home = () => {
   //   }
   // }, [count, product]);
 
-  const Completionist = () => <span>You are good to go!</span>;
-  const renderer = ({ hours, minutes, seconds, completed }) => {
-    if (completed) {
-      // Render a completed state
-      return <Completionist />;
-    } else {
-      // Render a countdown
-      return (
-        <span className="">
-          <span className=" bg-orange-500 text-white rounded-md mx-1 px-2 p-1">
-            {hours}
-          </span>
-          :
-          <span className="bg-orange-500 text-white rounded-md mx-1 px-2 p-1">
-            {minutes}
-          </span>
-          :
-          <span className="bg-orange-500 text-white rounded-md mx-1 px-2 p-1">
-            {seconds}
-          </span>
-        </span>
-      );
-    }
-  };
-
-  // if(product.length === 0){
-  //   return <Loader />
-  // }
-
   return (
-    <>
-          <Banner />
         <>
-          {/* <Container class1="home-wrapper-2 py-5">
-            <div className="home_product_top">
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-              >
-                <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">
-                  Product Categorie
-                </h2>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="categories flex-wrap align-items-center">
-                  {caregory?.map((item, i) => {
-                    return (
-                      <div
-                        key={i}
-                        onClick={() => gsidid(item.title)}
-                        className="d-flex gap flex-column align-items-center Category_Product"
-                      >
-                        <img
-                          className="category_image"
-                          src={`${image_url}uploads/${item.image}`}
-                          style={{ width: "100px", height: "100px" }}
-                          alt="camera"
-                        />
-                        <h6>{item.title}</h6>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </Container>
-          <Container class1="featured-wrapper py-2 home-wrapper-2">
-            <div className="home_product_top">
-              <div className="FalseDale">
-                <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">
-                  Flash Deals
-                </h2>
-                <div className="">
-                  <span className="text-[]0.7rem md:text-[1rem]">
-                    Ending in
-                  </span>
-                  <Countdown date={Date.now() + 10000000} renderer={renderer} />
-                </div>
-              </div>
-              <div>
-                <button>See More</button>
-              </div>
-            </div>
-
-            <div className="products-list pb-5">
-              <div className="home_product">
-                <ProductCardHome grid={grid} product={product?.slice(5, 10)} />
-              </div>
-            </div>
-          </Container> */}
+          <Banner />
+          <ProductCategory />
+          <FlashDeals />
+        <>
 
           {/* <Container class1="featured-wrapper py-2 home-wrapper-2">
             <div className="home_product_top">

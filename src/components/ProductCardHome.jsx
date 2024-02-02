@@ -1,52 +1,35 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import prodcompare from "../images/prodcompare.svg";
-import wish from "../images/wish.svg";
-import addcart from "../images/add-cart.svg";
-import view from "../images/view.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { creactWishlist, getWishlist, resetState } from "../services/product/productSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch} from "react-redux";
 import { toast } from "react-toastify";
-import { cartActions } from "../services/card/cardSlice";
 import {BsBagPlusFill} from "react-icons/bs"
 import {AiTwotoneHeart} from "react-icons/ai"
-import { image_url } from "../utils/baseUrl";
+import {cartActions} from "../redux/features/card/cardSlice"
+
+
+
+
 const ProductCardHome = (props) => {
   const { grid,product } = props;
   console.log(product);
-  let location = useLocation();
   const dispacth = useDispatch()
   const navigate = useNavigate()
-  const {wishlist,wishadd,isSuccess} = useSelector((state)=>state.product)
-  const {user} = useSelector((state)=>state.auth)
+
+  const user = false;
 
 
   console.log(user)
 
 
   const addWish = (id)=>{
-
-    const data = {
-      proId:id
-    }
-
       if(user){
-        const stttt = wishlist.find((ite)=>ite._id===id)
-        if(stttt){
-          // toast.error("already add wishlist !")
-        }else{
-          dispacth(creactWishlist(data))
-        }
+
       }else{
         navigate("/login")
       }
-      toast.success("SuccessFully add wishlist")
   }
 
-  useEffect(()=>{
-    dispacth(getWishlist())
-  },[wishadd])
 
   // useEffect(()=>{
   //   if(wishadd && isSuccess){
@@ -101,11 +84,11 @@ const ProductCardHome = (props) => {
                 </div>
                 <div className="product-image">
                  <Link to={`/product/${item._id}`}>
-                  <img src={item.images[0] ? image_url+'uploads/'+item.images[0] :"images/2748558.png"} className="img-fluid" alt="product image" />
+                  <img src={item.images[0] ? item.images[0] :"images/2748558.png"} className="img-fluid" alt="product" />
                  </Link>
                 </div>
                 <div className="product-details">
-                  <h6 className="brand">{item.brand.title}</h6>
+                  <h6 className="brand">{item.brand}</h6>
                   <h5 className="product-title" style={{height:"45px",width:"100%"}}>
                     {item.title.slice(0,30)}...
                   </h5>

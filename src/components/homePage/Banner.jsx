@@ -2,7 +2,6 @@ import React from "react";
 import Container from "../Container";
 import HomeSlyder from "../HomeSlyder";
 import { useGetAllBannerQuery } from "../../redux/features/banner/bannerApi";
-import { Link } from "react-router-dom";
 import Loader from "../Loader";
 
 const Banner = () => {

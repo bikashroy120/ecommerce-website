@@ -224,13 +224,13 @@ footer .input-group-text {
 
 .categories {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .categories > div {
   width: 100%;
   background-color: white;
   /* box-shadow: 0 0 10px #0000001a; */
-  padding: 10px 10px 10px 20px;
+  padding: 20px 20px !important;
 }
 .categories > div > div {
   width: 60%;
@@ -998,6 +998,14 @@ footer .input-group-text {
 
 .background_color{
   background: #fdce91;
+}
+
+.Category_Product{
+  padding: 20px 10px !important;
+}
+
+.Category_Product .category_image{
+  border-radius: 10px;
 }
 
 .Category_Product:hover{
