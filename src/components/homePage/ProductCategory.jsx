@@ -3,7 +3,7 @@ import Container from "../Container";
 import { useGetAllCategoryQuery } from "../../redux/features/banner/bannerApi";
 
 const ProductCategory = () => {
-  const { data, isLoading } = useGetAllCategoryQuery("");
+  const { data } = useGetAllCategoryQuery("");
 
   console.log(data);
 

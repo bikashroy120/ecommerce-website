@@ -21,8 +21,14 @@ export const bannerApi = apiSlice.injectEndpoints({
                 method:"GET",
             })
         }),
+        getSingleProduct:builder.query({
+            query:(id)=>({
+                url:`product/${id}`,
+                method:"GET",
+            })
+        }),
     })
 })
 
 
-export const {useGetAllBannerQuery,useGetAllCategoryQuery,useGetAllProductQuery} = bannerApi;
+export const {useGetAllBannerQuery,useGetAllCategoryQuery,useGetAllProductQuery,useGetSingleProductQuery} = bannerApi;
