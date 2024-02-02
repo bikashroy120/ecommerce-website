@@ -19,9 +19,6 @@ const ProductCardHome = (props) => {
   const user = false;
 
 
-  console.log(user)
-
-
   const addWish = (id)=>{
       if(user){
 
