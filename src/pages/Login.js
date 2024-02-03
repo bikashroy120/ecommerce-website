@@ -1,36 +1,43 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
-import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { login } from "../services/auth/authSlice";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { useLoginMutation } from "../redux/features/auth/authApi";
 
 const Login = () => {
-const {user,isSuccess,isLoading,message} = useSelector((state)=>state.auth)
+  const [login,{isSuccess,isLoading,error}] =useLoginMutation()
   const navigate = useNavigate();
-  const dispatch = useDispatch()
   const [data,setData]=useState({
     email:"bikash@gmail.com",
     password:"123456"
   })
 
-const signup = (e)=>{
+
+  useEffect(()=>{
+    if(isSuccess){
+      const message = "login success"
+      toast.success(message)
+      navigate("/")
+    }
+    if(error){
+        toast.error("register failed ! please try again")
+    }
+  },[isSuccess,error])
+
+
+const signup = async(e)=>{
   e.preventDefault();
-  console.log(data)
-  dispatch(login(data))
-}
-
-
-useEffect(()=>{
-  if(isSuccess && user && message){
-    navigate(-1)
+  if(data.email==="" || data.password===""){
+    toast.error("Please fill all data and try again")
+  }else{
+    await login(data)
   }
-},[isSuccess, user, message])
-
+}
 
   return (
     <>
@@ -61,9 +68,9 @@ useEffect(()=>{
                     <button onClick={signup}  className="button border-0" type="submit">
                      {isLoading ? "lodding.." :"login"} 
                     </button>
-                    <Link to="/signup" className="button signup">
-                      SignUp
-                    </Link>
+                  </div>
+                  <div className=" d-flex pt-3 align-items-center justify-content-center">
+                      <span>Dont have an account? <Link to="/signup" className="text_color"> SignUp</Link></span>
                   </div>
                 </div>
               </form>

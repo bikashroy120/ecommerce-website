@@ -4,14 +4,12 @@ import Meta from "../components/Meta";
 import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useRegisterMutation } from "../redux/features/auth/authApi";
 const Signup = () => {
   const [register,{isLoading,isSuccess,error}] = useRegisterMutation()
-  const dispatch = useDispatch()
   const navigate =  useNavigate()
   const [data,setData]=useState({
     fastname:"",
@@ -81,6 +79,9 @@ const signup = async(e)=>{
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
                     <button type="submit" onClick={signup} className="button border-0">{isLoading ? "Loading..." :"Sign Up"}</button>
+                  </div>
+                  <div className=" d-flex pt-3 align-items-center justify-content-center">
+                      <span>Already have an account? <Link to="/login" className="text_color">Login</Link></span>
                   </div>
                 </div>
               </form>

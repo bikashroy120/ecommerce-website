@@ -47,18 +47,18 @@ export const authApi = apiSlice.injectEndpoints({
         try {
           const result = await queryFulfilled;
 
-          console.log(result)
+          console.log(result?.data?.token)
 
-          // localStorage.setItem(
-          //   "token",
-          //   JSON.stringify(result?.data?.accessToken)
-          // );
-          // dispatch(
-          //   userLoggedIn({
-          //     accessToken: result.data.accessToken,
-          //     user: result?.data?.user,
-          //   })
-          // );
+          localStorage.setItem(
+            "token",
+            JSON.stringify(result?.data?.token)
+          );
+          dispatch(
+            userLoggedIn({
+              accessToken: result.data.token,
+              user: result?.data?.user,
+            })
+          );
         } catch (error) {
           console.log(error);
         }
