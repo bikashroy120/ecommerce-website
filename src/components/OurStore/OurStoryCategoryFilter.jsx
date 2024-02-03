@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetAllCategoryQuery } from "../../redux/features/banner/bannerApi";
 
-const OurStoryCategoryFilter = ({selectedCategories,setSelectedCategories, }) => {
+const OurStoryCategoryFilter = ({selectedCategories,setSelectedCategories,setPage }) => {
  
 
   const { data: category, isLoading: ctegoryLoading } =
@@ -14,8 +14,10 @@ const OurStoryCategoryFilter = ({selectedCategories,setSelectedCategories, }) =>
     if (isSelected) {
       const updateData = selectedCategories.filter((item) => item !== title);
       setSelectedCategories(updateData);
+      setPage(1)
     } else {
       setSelectedCategories((prev) => [...prev, title]);
+      setPage(1)
     }
   };
 

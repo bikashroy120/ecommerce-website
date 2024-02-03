@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetAllBrandQuery } from "../../redux/features/banner/bannerApi";
 
-const FilterByBrand = ({ selectedBrands, setSelectedBrands }) => {
+const FilterByBrand = ({ selectedBrands, setSelectedBrands,setPage }) => {
 
 
   const { data: category, isLoading: ctegoryLoading } =
@@ -14,8 +14,10 @@ const FilterByBrand = ({ selectedBrands, setSelectedBrands }) => {
     if (isSelected) {
       const updateData = selectedBrands.filter((item) => item !== title);
       setSelectedBrands(updateData);
+      setPage(1)
     } else {
         setSelectedBrands((prev) => [...prev, title]);
+        setPage(1)
     }
   };
 

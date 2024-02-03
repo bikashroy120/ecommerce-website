@@ -7,6 +7,7 @@ import {useSelector } from "react-redux";
 import OurStoreLeft from "../components/OurStore/OurStoreLeft";
 import { useGetAllProductQuery } from "../redux/features/banner/bannerApi";
 import Loader from "../components/Loader";
+import ReactPaginate from "react-paginate";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(3);
@@ -19,7 +20,7 @@ const OurStore = () => {
 
   const {data:products,isLoading} = useGetAllProductQuery(searchQuery,{})
 
-  console.log(products?.products)
+  const itemsPerPage = 12;
 
   const generateQuery = (selectedCategories,selectedBrands,HiLow) => {
     const queryParams = [];
@@ -27,7 +28,7 @@ const OurStore = () => {
     if (selectedCategories) {
       selectedCategories.forEach((category) => {
         queryParams.push(`category=${category}`);
-      });
+      })
     }
 
     if (selectedBrands) {
@@ -45,14 +46,13 @@ const OurStore = () => {
 
   useEffect(() => {
     const query = generateQuery(selectedCategories,selectedBrands,HiLow);
-    setSearchQuery(`${query}&page=${page}&limit=${5}`);
+    setSearchQuery(`${query}&page=${page}&limit=${itemsPerPage}`);
   }, [selectedCategories, page, selectedBrands,HiLow]);
 
-  console.log(search)
 
   useEffect(()=>{
     if(search){
-      setSearchQuery(`search=${search}&page=${page}&limit=${5}`);
+      setSearchQuery(`search=${search}&page=${page}&limit=${itemsPerPage}`);
     }
     if(category){
       setSelectedCategories([category])
@@ -60,8 +60,9 @@ const OurStore = () => {
 
   },[search,page,category])
 
-
-  console.log("==================", searchQuery);
+  const handlePageClick = (event) => {
+    setPage(event.selected+1)
+  };
 
   // console.log(last)
   return (
@@ -75,6 +76,7 @@ const OurStore = () => {
             selectedCategories={selectedCategories}
             selectedBrands={selectedBrands}
             setSelectedBrands={setSelectedBrands}
+            setPage={setPage}
           />
           <div className="col-lg-9 col-12">
             <div className="filter-sort-grid mb-4">
@@ -144,6 +146,19 @@ const OurStore = () => {
                 {isLoading ? <><Loader /></> :<><ProductCard grid={grid} product={products?.products}/></>}
                 
               </div>
+              <div className="py-3">
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel=">>"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={itemsPerPage}
+                pageCount={Math.ceil(products?.item / itemsPerPage)}
+                previousLabel="<<"
+                renderOnZeroPageCount={null}
+                containerClassName=" pagination "
+                activeClassName="pagination-active"
+              />
+            </div>
             </div>
           </div>
         </div>

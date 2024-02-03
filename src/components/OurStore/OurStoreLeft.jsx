@@ -7,6 +7,7 @@ const OurStoreLeft = ({
   setSelectedCategories,
   selectedBrands,
   setSelectedBrands,
+  setPage
 }) => {
   // const [min, setMin] = useState();
   // const [mix, setMix] = useState();
@@ -19,6 +20,7 @@ const OurStoreLeft = ({
           <OurStoryCategoryFilter
             setSelectedCategories={setSelectedCategories}
             selectedCategories={selectedCategories}
+            setPage={setPage}
           />
         </div>
         <div className="filter-card mb-3">
@@ -27,6 +29,7 @@ const OurStoreLeft = ({
             <FilterByBrand
               selectedBrands={selectedBrands}
               setSelectedBrands={setSelectedBrands}
+              setPage={setPage}
             />
             {/* <h5 className="sub-title">Price</h5>
             <div className="d-flex align-items-center gap-10">

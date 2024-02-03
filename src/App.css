@@ -145,6 +145,30 @@ footer .input-group-text {
 }
 /* Footer Part Ends Here */
 
+
+/* for pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pagination li a{
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.pagination li a:hover{
+  background-color: #5ab1bb;
+  color: #fff !important;
+}
+
+.pagination-active a {
+  background-color: #5ab1bb;
+  color: #fff !important;
+  padding: 10px;
+}
+
 /* Home Page */
 
 .banner_image{
