@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate,useLocation } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import wishlist from "../images/wishlist.svg";
@@ -8,7 +8,7 @@ import menu from "../images/menu.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineHome } from "react-icons/ai";
 import { image_url } from "../utils/baseUrl";
-import { addSearch } from "../redux/features/auth/authSlice";
+import { addCategory, addSearch } from "../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import { useGetAllCategoryQuery } from "../redux/features/banner/bannerApi";
 const Header = () => {
@@ -31,6 +31,19 @@ const Header = () => {
       navigate("/product");
     }
   };
+
+  const handelCategory = (category)=>{
+    dispatch(addCategory(category));
+    navigate("/product");
+  }
+
+  useEffect(()=>{
+    if(location?.pathname !=="/product"){
+      dispatch(addCategory(""));
+      dispatch(addSearch(""));
+      setSearch("")
+    }
+  },[location?.pathname])
 
   const user = false;
 
@@ -169,7 +182,7 @@ const Header = () => {
                         {category?.slice(0,8).map((item, i) => {
                           return (
                             <li key={i}>
-                              <button className="dropdown-item text-white" to="">
+                              <button onClick={()=>handelCategory(item.title)} className="dropdown-item text-white" to="">
                                 {item.title}
                               </button>
                             </li>

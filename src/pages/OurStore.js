@@ -3,7 +3,7 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
 import Container from "../components/Container";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import OurStoreLeft from "../components/OurStore/OurStoreLeft";
 import { useGetAllProductQuery } from "../redux/features/banner/bannerApi";
 import Loader from "../components/Loader";
@@ -15,7 +15,7 @@ const OurStore = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const {search} = useSelector((state)=>state.auth)
+  const {search,category} = useSelector((state)=>state.auth)
 
   const {data:products,isLoading} = useGetAllProductQuery(searchQuery,{})
 
@@ -53,10 +53,12 @@ const OurStore = () => {
   useEffect(()=>{
     if(search){
       setSearchQuery(`search=${search}&page=${page}&limit=${5}`);
-      // setSelectedCategories([])
-      // setSelectedBrands([])
     }
-  },[search,page])
+    if(category){
+      setSelectedCategories([category])
+    }
+
+  },[search,page,category])
 
 
   console.log("==================", searchQuery);
