@@ -1,24 +1,14 @@
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
 
-type RegistrationResponse = {
-  message: string;
-  token: string;
-  code: number;
-};
-
-type LoginResponse = {};
-
-type RegistrationData = {};
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    register: builder.mutation<RegistrationResponse, RegistrationData>({
+    register: builder.mutation({
       query: (data) => ({
-        url: "regester",
+        url: "user/regester",
         method: "POST",
         body: data,
-        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
@@ -26,10 +16,10 @@ export const authApi = apiSlice.injectEndpoints({
           dispatch(
             userRegistration({
               token: result.data.token,
-              code: result.data.code,
+              code: "",
             })
           );
-        } catch (error: any) {
+        } catch (error) {
           console.log(error);
         }
       },
@@ -46,28 +36,30 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     login: builder.mutation({
       query: ({ email, password }) => ({
-        url: "login",
+        url: "user/login",
         method: "POST",
         body: {
           email,
           password,
         },
-        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          localStorage.setItem(
-            "token",
-            JSON.stringify(result?.data?.accessToken)
-          );
-          dispatch(
-            userLoggedIn({
-              accessToken: result.data.accessToken,
-              user: result?.data?.user,
-            })
-          );
-        } catch (error: any) {
+
+          console.log(result)
+
+          // localStorage.setItem(
+          //   "token",
+          //   JSON.stringify(result?.data?.accessToken)
+          // );
+          // dispatch(
+          //   userLoggedIn({
+          //     accessToken: result.data.accessToken,
+          //     user: result?.data?.user,
+          //   })
+          // );
+        } catch (error) {
           console.log(error);
         }
       },
@@ -76,14 +68,13 @@ export const authApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "logout",
         method: "GET",
-        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           localStorage.removeItem("token");
           dispatch(userLoggedOut());
-        } catch (error: any) {
+        } catch (error) {
           console.log(error);
         }
       },
@@ -98,21 +89,18 @@ export const authApi = apiSlice.injectEndpoints({
           phone,
           address,
         },
-        credentials: "include" as const,
       }),
     }),
     getAllUser: builder.query({
-      query: (query: any) => ({
+      query: (query) => ({
         url: `users?${query}`,
         method: "GET",
-        credentials: "include" as const,
       }),
     }),
     deleteUser: builder.mutation({
       query: (id) => ({
         url: `delete-user/${id}`,
         method: "DELETE",
-        credentials: "include" as const,
       }),
     }),
     password: builder.mutation({
@@ -120,7 +108,6 @@ export const authApi = apiSlice.injectEndpoints({
         url: `/update-password`,
         method: "POST",
         body:data,
-        credentials: "include" as const,
       }),
     }),
   }),

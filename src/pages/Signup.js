@@ -4,13 +4,13 @@ import Meta from "../components/Meta";
 import Container from "../components/Container";
 import CustomInput from "../components/CustomInput";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {register } from "../services/auth/authSlice";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useRegisterMutation } from "../redux/features/auth/authApi";
 const Signup = () => {
-  const {singup, sError,sLoadding,Ssuccess} = useSelector((state)=>state.auth)
+  const [register,{isLoading,isSuccess,error}] = useRegisterMutation()
   const dispatch = useDispatch()
   const navigate =  useNavigate()
   const [data,setData]=useState({
@@ -21,25 +21,28 @@ const Signup = () => {
     password:""
   })
 
-const signup = (e)=>{
+  useEffect(()=>{
+    if(isSuccess){
+      const message = "Register success"
+      toast.success(message)
+      navigate("/login")
+    }
+    if(error){
+        toast.error("register failed ! please try again")
+    }
+  },[isSuccess,error])
+
+const signup = async(e)=>{
   e.preventDefault();
+
   console.log(data)
-  dispatch(register(data))
+
+  if(data.fastname==="" || data.lastname==="" || data.email==="" || data.mobile==="" || data.password===""){
+    toast.error("please fill all data and try again!")
+  }else{
+    await register(data)
+  }
 }
-
-
-useEffect(()=>{
-
-  if(Ssuccess && singup){
-    navigate("/")
-    toast.success("Sing up success")
-  }
-
-  if(sError){
-    toast.error("error")
-  }
-
-},[singup,sError,sLoadding,Ssuccess])
 
 
   return (
@@ -77,7 +80,7 @@ useEffect(()=>{
                 />
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button type="submit" onClick={signup} className="button border-0">{sLoadding ? "Loadding..." :"Sign Up"}</button>
+                    <button type="submit" onClick={signup} className="button border-0">{isLoading ? "Loading..." :"Sign Up"}</button>
                   </div>
                 </div>
               </form>
@@ -88,15 +91,5 @@ useEffect(()=>{
     </>
   );
 };
-
-{/* <ColorRing
-  visible={true}
-  height="80"
-  width="80"
-  ariaLabel="blocks-loading"
-  wrapperStyle={{}}
-  wrapperClass="blocks-wrapper"
-  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-/> */}
 
 export default Signup;
