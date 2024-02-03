@@ -104,6 +104,12 @@ a {
   z-index: 9999;
 }
 
+.header_cart{
+  position: absolute;
+  top: -7px;
+  right: -13px;
+}
+
 .header-bottom .dropdown button:focus {
   box-shadow: none;
 }

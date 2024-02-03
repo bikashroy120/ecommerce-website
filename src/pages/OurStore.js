@@ -15,6 +15,7 @@ const OurStore = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const {search} = useSelector((state)=>state.auth)
 
   const {data:products,isLoading} = useGetAllProductQuery(searchQuery,{})
 
@@ -46,6 +47,16 @@ const OurStore = () => {
     const query = generateQuery(selectedCategories,selectedBrands,HiLow);
     setSearchQuery(`${query}&page=${page}&limit=${5}`);
   }, [selectedCategories, page, selectedBrands,HiLow]);
+
+  console.log(search)
+
+  useEffect(()=>{
+    if(search){
+      setSearchQuery(`search=${search}&page=${page}&limit=${5}`);
+      // setSelectedCategories([])
+      // setSelectedBrands([])
+    }
+  },[search,page])
 
 
   console.log("==================", searchQuery);

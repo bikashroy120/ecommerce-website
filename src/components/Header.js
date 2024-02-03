@@ -1,32 +1,36 @@
-import React from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Link, useNavigate,useLocation } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import compare from "../images/compare.svg";
 import wishlist from "../images/wishlist.svg";
 import users from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineHome } from "react-icons/ai";
-import { useEffect } from "react";
-import { cartActions } from "../services/card/cardSlice";
 import { image_url } from "../utils/baseUrl";
+import { addSearch } from "../redux/features/auth/authSlice";
+import { toast } from "react-toastify";
+import { useGetAllCategoryQuery } from "../redux/features/banner/bannerApi";
 const Header = () => {
-  // const cartItem = useSelector((state)=>state.cart.itemList)
-  // const subtotal = useSelector((state)=>state.cart.subtotal);
+  const cartItem = useSelector((state) => state.cart.itemList);
+  // const subtotal = useSelector((state) => state.cart.subtotal);
   // const {user} = useSelector((state)=>state.auth);
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  // const { caregory } = useSelector((state) => state.product);
   const navigate = useNavigate();
+  const {data:category} = useGetAllCategoryQuery("")
+  const location = useLocation()
 
-  // useEffect(()=>{
-  //   dispatch(cartActions.getTotals())
-  // },[cartItem])
+  console.log("location======",location?.pathname)
 
-  // const gsidid = (item)=>{
-  //   dispatch(cartActions.setFilter(item))
-  //   navigate("/product")
-  // }
+  const handelSearch = () => {
+    if (!search) {
+      toast.error("please type anything");
+    } else {
+      dispatch(addSearch(search));
+      navigate("/product");
+    }
+  };
 
   const user = false;
 
@@ -68,10 +72,16 @@ const Header = () => {
                     placeholder="Search Product Here..."
                     aria-label="Search Product Here..."
                     aria-describedby="basic-addon2"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                   />
-                  <span className="input-group-text px-4" id="basic-addon2">
+                  <button
+                    onClick={() => handelSearch()}
+                    className="input-group-text px-4"
+                    id="basic-addon2"
+                  >
                     <BsSearch className="fs-6" />
-                  </span>
+                  </button>
                 </div>
               </div>
               <div className="col-3 col-md-3 ">
@@ -117,15 +127,15 @@ const Header = () => {
                   <div>
                     <Link
                       to="/cart"
-                      className="d-flex align-items-center gap-10 text-white"
+                      className="d-flex position-relative align-items-center gap-10 text-white"
                     >
                       <img src={cart} alt="cart" />
-                      {/* <div className="d-flex flex-column gap-10">
+                      <div className="d-flex flex-column gap-10 header_cart">
                         <span className="badge bg-white text-dark">
                           {cartItem.length}
                         </span>
-                        <p className="mb-0">$ {subtotal}</p>
-                      </div> */}
+                        {/* <p className="mb-0">$ {subtotal}</p> */}
+                      </div>
                     </Link>
                   </div>
                 </div>
@@ -156,15 +166,15 @@ const Header = () => {
                         className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton1"
                       >
-                        {/* {caregory?.map((item, i) => {
+                        {category?.slice(0,8).map((item, i) => {
                           return (
                             <li key={i}>
-                              <Link className="dropdown-item text-white" to="">
+                              <button className="dropdown-item text-white" to="">
                                 {item.title}
-                              </Link>
+                              </button>
                             </li>
                           );
-                        })} */}
+                        })}
                       </ul>
                     </div>
                   </div>
@@ -255,15 +265,15 @@ const Header = () => {
           <div>
             <Link
               to="/cart"
-              className="d-flex align-items-center gap-10 text-white"
+              className="d-flex position-relative align-items-center gap-10 text-white"
             >
               <img src={cart} alt="cart" />
-              {/* <div className="d-flex flex-column gap-10">
+              <div className="d-flex flex-column gap-10 header_cart">
                 <span className="badge bg-white text-dark">
                   {cartItem.length}
                 </span>
-                <p className="mb-0">$ {subtotal}</p>
-              </div> */}
+                {/* <p className="mb-0">$ {subtotal}</p> */}
+              </div>
             </Link>
           </div>
         </div>
