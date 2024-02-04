@@ -1,17 +1,13 @@
 import React from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
-import watch from "../images/watch.jpg";
-import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { cartActions } from "../services/card/cardSlice";
 import { image_url } from "../utils/baseUrl";
 
 const Cart = () => {
-  const [count,setCount] = useState(1)
   const cartItem = useSelector((state)=>state.cart.itemList)
   const subtotal = useSelector((state)=>state.cart.subtotal);
   const dispacth = useDispatch()
@@ -59,7 +55,7 @@ const Cart = () => {
                   <div key={1} className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
                   <div className="cart-col-1 gap-15 d-flex align-items-center">
                     <div className="w-25">
-                      <img src={`${image_url}uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
+                      <img src={`${item.feature_image}`} className="img-fluid" alt="product" />
                     </div>
                     <div className="w-75">
                       <p>{item.productname}</p>

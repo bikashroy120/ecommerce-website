@@ -995,7 +995,7 @@ footer .input-group-text {
 .Shopping_summary{
   background: #fff;
   position: sticky;
-  top: 0;
+  top: 170px;
   left: 0;
   padding: 20px;
 }

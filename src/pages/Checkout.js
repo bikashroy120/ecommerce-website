@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
-import watch from "../images/watch.jpg";
 import Container from "../components/Container";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { BsCreditCard, BsCashCoin } from "react-icons/bs";
@@ -11,11 +10,9 @@ import { cartActions } from "../services/card/cardSlice";
 import { useEffect } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import axios from "axios";
-import { config } from "../utils/axiosconfig";
-import { base_url, image_url } from "../utils/baseUrl";
-import { creactOrder } from "../services/profile/profileSlice";
 import PageProted from "../utils/PageProted";
+import { useCreateOrderMutation } from "../redux/features/auth/authApi";
+import { toast } from "react-toastify";
 
 let schema = yup.object().shape({
   FirstName: yup.string().required("First Name is Required"),
@@ -24,7 +21,6 @@ let schema = yup.object().shape({
   phone: yup.string().required("Phone is Required"),
   address: yup.string().required("Address is Required"),
   city: yup.string().required("city is Required"),
-  country: yup.string().required("Country is Required"),
   zip: yup.string().required("ZIP is Required"),
   shipping: yup.string().required("shipping is Required"),
   method: yup.string().required("Method is Required"),
@@ -35,10 +31,26 @@ const Checkout = () => {
   const subtotal = useSelector((state) => state.cart.subtotal);
   const { user } = useSelector((state) => state.auth);
 
+  const [createOrder,{isLoading,data,isSuccess,error}] = useCreateOrderMutation()
+
   const [dId, setDID] = useState();
   const [cId, setCID] = useState();
   const [total, setTotle] = useState();
   const navigate = useNavigate();
+
+
+  useEffect(()=>{
+    if(isSuccess){
+      const message = "Order create success success"
+      toast.success(message)
+      navigate(`/order/${data?._id}`)
+    }
+    if(error){
+        toast.error("Order failed ! please try again")
+    }
+  },[isSuccess,error,data])
+
+
   const dalevary = [
     {
       id: 1,
@@ -104,7 +116,7 @@ const Checkout = () => {
   }, [dId, cId, total, cartItem]);
 
   useEffect(() => {
-    formik.values.FirstName = user?.firstname;
+    formik.values.FirstName = user?.fastname;
     formik.values.email = user?.email;
     formik.values.phone = user?.mobile;
     formik.values.LastName = user?.lastname;
@@ -132,10 +144,9 @@ const Checkout = () => {
       products: [],
     },
     validationSchema: schema,
-    onSubmit: (values) => {
-      // formik.resetForm();
-      // CreactOrder(values)
-      dispacth(creactOrder(values));
+    onSubmit: async(values) => {
+      await createOrder(values)
+      console.log(values)
     },
   });
 
@@ -183,13 +194,6 @@ const Checkout = () => {
                 Navdeep Dahiya (monud0232@gmail.com)
               </p> */}
                   <form className="" onSubmit={formik.handleSubmit}>
-                    {/* <div className="w-100">
-                  <select name="" className="form-control form-select" id="">
-                    <option value="" selected disabled>
-                      Select Country
-                    </option>
-                  </select>
-                </div> */}
                     <h4 className="mb-3">01. Personal Details</h4>
                     <div className="Chakeout_box py-3">
                       <div className=" checkout_inputbox">
@@ -314,7 +318,7 @@ const Checkout = () => {
                           {formik.touched.city && formik.errors.city}
                         </div>
                       </div>
-                      <div className="checkout_inputbox">
+                      {/* <div className="checkout_inputbox">
                         <label style={{ marginLeft: "10px" }}>Country</label>
                         <input
                           type="text"
@@ -331,7 +335,7 @@ const Checkout = () => {
                         >
                           {formik.touched.country && formik.errors.country}
                         </div>
-                      </div>
+                      </div> */}
                       <div className="checkout_inputbox">
                         <label style={{ marginLeft: "10px" }}>
                           ZIP / Postal
@@ -434,8 +438,7 @@ const Checkout = () => {
                         </Link>
                         <button type="submit" className="button">
                           {
-                            // isLoading ? "loadding.." :" Order"
-                            "Order"
+                            isLoading ? "Loading..." :" Order"
                           }
                         </button>
                       </div>
@@ -456,7 +459,7 @@ const Checkout = () => {
                               <div className="w-25 position-relative">
                                 <img
                                   className="img-fluid"
-                                  src={`${image_url}uploads/${item.feature_image}`}
+                                  src={`${item.feature_image}`}
                                   alt="product"
                                 />
                               </div>

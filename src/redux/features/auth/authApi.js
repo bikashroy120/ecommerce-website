@@ -110,6 +110,13 @@ export const authApi = apiSlice.injectEndpoints({
         body:data,
       }),
     }),
+    createOrder: builder.mutation({
+      query: (data) => ({
+        url: `user/add-order`,
+        method: "POST",
+        body:data,
+      }),
+    }),
   }),
 });
 
@@ -121,5 +128,6 @@ export const {
   useUpdateMutation,
   useGetAllUserQuery,
   useDeleteUserMutation,
-  usePasswordMutation
+  usePasswordMutation,
+  useCreateOrderMutation,
 } = authApi;
