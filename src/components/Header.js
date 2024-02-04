@@ -11,6 +11,7 @@ import { image_url } from "../utils/baseUrl";
 import { addCategory, addSearch } from "../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import { useGetAllCategoryQuery } from "../redux/features/banner/bannerApi";
+import { cartActions } from "../redux/features/card/cardSlice";
 const Header = () => {
   const cartItem = useSelector((state) => state.cart.itemList);
   // const subtotal = useSelector((state) => state.cart.subtotal);
@@ -31,6 +32,10 @@ const Header = () => {
       navigate("/product");
     }
   };
+
+  useEffect(()=>{
+    dispatch(cartActions.getTotals(cartItem))
+  },[cartItem])
 
   const handelCategory = (category)=>{
     dispatch(addCategory(category));
