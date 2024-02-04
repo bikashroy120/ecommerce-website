@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import {RxDashboard} from "react-icons/rx"
 import {GrUnorderedList} from "react-icons/gr"
 import {FiSettings} from "react-icons/fi"
-import {MdOutlineRequestPage} from "react-icons/md"
 import {AiOutlineUnlock} from "react-icons/ai"
 import Container from '../components/Container'
 import { useState } from 'react'
@@ -12,7 +11,6 @@ import UpdateProfile from '../components/profile/UpdateProfile'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
-import { getDashbord } from '../services/profile/profileSlice'
 
 const Profile = () => {
     const naviget =  useNavigate()
@@ -46,15 +44,12 @@ const Profile = () => {
         // },
     ]
 
-    useEffect(()=>{
-        dispacth(getDashbord())
-    },[dispacth])
+
 
     const logOut = ()=>{
         localStorage.clear()
         naviget("/")
         toast.success("Log out success")
-        window.location.reload()
     }
 
 

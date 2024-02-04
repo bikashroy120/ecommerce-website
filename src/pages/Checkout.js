@@ -35,7 +35,7 @@ const Checkout = () => {
   const cartItem = useSelector((state)=>state.cart.itemList)
   const subtotal = useSelector((state)=>state.cart.subtotal);
   const {user} = useSelector((state)=>state.auth);
-  const {order,isLoading,isSuccess} = useSelector((state)=>state.profile)
+
   const [dId,setDID] = useState()
   const [cId,setCID] = useState()
   const [total,setTotle]=useState()
@@ -105,12 +105,7 @@ const Checkout = () => {
       formik.values.products = cartItem
   },[dId,cId,total,cartItem])
 
-  useEffect(()=>{
-    if(isSuccess && order){
-      navegate(`/order/${order._id}`)
-      localStorage.removeItem("cartdata")
-    }
-  },[isSuccess,order])
+
 
 
   useEffect(()=>{
@@ -124,7 +119,6 @@ const Checkout = () => {
   //   const res = await axios.post(`${base_url}/user/add-order`,data,config)
   //   console.log(res)
   // }
-  console.log(order)
 
   const formik = useFormik({
     initialValues: {
@@ -393,7 +387,8 @@ const Checkout = () => {
                     </Link>
                     <button type="submit" className="button">
                       {
-                        isLoading ? "loadding.." :" Order"
+                        // isLoading ? "loadding.." :" Order"
+                        "Order"
                       }
                      
                     </button>

@@ -14,7 +14,7 @@ import { useGetAllCategoryQuery } from "../redux/features/banner/bannerApi";
 const Header = () => {
   const cartItem = useSelector((state) => state.cart.itemList);
   // const subtotal = useSelector((state) => state.cart.subtotal);
-  // const {user} = useSelector((state)=>state.auth);
+  const {user} = useSelector((state)=>state.auth);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const Header = () => {
     }
   },[location?.pathname])
 
-  const user = false;
+  console.log(user)
 
   return (
     <>
@@ -117,7 +117,7 @@ const Header = () => {
                         to="/profile"
                         className="d-flex align-items-center gap-10 text-white"
                       >
-                        {/* <img src={user.image ? image_url+'uploads/'+user.image : "images/user.jpg"} style={{width:"40px", height:"40px",borderRadius:"50%"}} alt="user" /> */}
+                        <img src={!user.image ? user.image : "images/user.jpg"} style={{width:"40px", height:"40px",borderRadius:"50%"}} alt="user" />
                         {/* <p className="mb-0">
                         Log in <br /> My Account
                       </p> */}

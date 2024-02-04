@@ -11,8 +11,7 @@ import { getDashbord } from '../../services/profile/profileSlice'
 const Dashbord = () => {
 {/* <img src={`http://localhost:5000/uploads/${row.feature_image}`} className='' style={{width:"40px", height:"40px",borderRadius:"50%"}} ></img> */}
         
-        const {dashbord} = useSelector((state)=>state.profile)
-
+        
 
 
 const columns = [
@@ -57,7 +56,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Total Order</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.totalOrder}</h5>
+                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.totalOrder}</h5> */}
                     </div>
                 </div>
             </div>
@@ -68,7 +67,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Pending Order</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.paddingOrder}</h5>
+                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.paddingOrder}</h5> */}
                     </div>
                 </div>
             </div>
@@ -79,7 +78,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Processing Orde</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.ProcessingOrder}</h5>
+                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.ProcessingOrder}</h5> */}
                     </div>
                 </div>
             </div>
@@ -90,7 +89,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Complete Order</h6>
-                        <h5 style={{margin:"0",padding:"0"}}>{dashbord.CompleteOrder}</h5>
+                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.CompleteOrder}</h5> */}
                     </div>
                 </div>
             </div>
@@ -100,7 +99,7 @@ const columns = [
             <div className='col-12'>
                 <h5 className=' mt-4'>Recent Order</h5>
                 <div className='border_data'>
-                <Table columns={columns} data={dashbord.order}/>
+                {/* <Table columns={columns} data={dashbord.order}/> */}
                 </div>
                 
             </div>
