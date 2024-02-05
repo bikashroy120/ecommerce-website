@@ -15,6 +15,8 @@ import { useGetOrderQuery } from "../redux/features/auth/authApi";
 import Loader from "../components/Loader";
 import PageProted from "../utils/PageProted";
 import { MdOutlineRequestPage } from "react-icons/md";
+import { userLoggedOut } from "../redux/features/auth/authSlice";
+import ChangePassword from "../components/profile/ChangePassword";
 
 const Profile = () => {
   const naviget = useNavigate();
@@ -53,7 +55,8 @@ const Profile = () => {
   ];
 
   const logOut = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    dispacth(userLoggedOut({user:"",token:""}))
     naviget("/");
     toast.success("Log out success");
   };
@@ -100,6 +103,8 @@ const Profile = () => {
                   {profileActive === 2 && <Order data={data}/>}
 
                   {profileActive === 3 && <UpdateProfile />}
+
+                  {profileActive === 4 && <ChangePassword />}
                 </div>
               </div>
             </div>

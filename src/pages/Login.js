@@ -25,7 +25,7 @@ const Login = () => {
       navigate("/")
     }
     if(error){
-        toast.error("register failed ! please try again")
+        toast.error("invalid email and password")
     }
   },[isSuccess,error])
 
