@@ -4,15 +4,8 @@ import {MdWifiProtectedSetup} from "react-icons/md"
 import {CiDeliveryTruck} from "react-icons/ci"
 import {GiCheckMark} from "react-icons/gi"
 import Table from '../Table'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getDashbord } from '../../services/profile/profileSlice'
 
-const Dashbord = () => {
-{/* <img src={`http://localhost:5000/uploads/${row.feature_image}`} className='' style={{width:"40px", height:"40px",borderRadius:"50%"}} ></img> */}
-        
-        
-
+const Dashbord = ({data}) => {
 
 const columns = [
         {
@@ -38,11 +31,6 @@ const columns = [
             selector: row => row.totle            ,
             center:true
         },
-        // {
-        //     name: 'ACTION',
-        //     selector: row => <button>details</button>,
-        //     center:true
-        // },
     ];
 
   return (
@@ -56,7 +44,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Total Order</h6>
-                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.totalOrder}</h5> */}
+                        <h5 style={{margin:"0",padding:"0"}}>{data?.totalOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -67,7 +55,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Pending Order</h6>
-                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.paddingOrder}</h5> */}
+                        <h5 style={{margin:"0",padding:"0"}}>{data?.paddingOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -78,7 +66,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Processing Orde</h6>
-                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.ProcessingOrder}</h5> */}
+                        <h5 style={{margin:"0",padding:"0"}}>{data?.ProcessingOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -89,7 +77,7 @@ const columns = [
                     </div>
                     <div>
                         <h6 style={{margin:"0",padding:"0"}}>Complete Order</h6>
-                        {/* <h5 style={{margin:"0",padding:"0"}}>{dashbord.CompleteOrder}</h5> */}
+                        <h5 style={{margin:"0",padding:"0"}}>{data?.CompleteOrder}</h5>
                     </div>
                 </div>
             </div>
@@ -99,7 +87,7 @@ const columns = [
             <div className='col-12'>
                 <h5 className=' mt-4'>Recent Order</h5>
                 <div className='border_data'>
-                {/* <Table columns={columns} data={dashbord.order}/> */}
+                <Table columns={columns} data={data?.order}/>
                 </div>
                 
             </div>
