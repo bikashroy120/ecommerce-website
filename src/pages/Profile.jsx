@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { useGetOrderQuery } from "../redux/features/auth/authApi";
 import Loader from "../components/Loader";
 import PageProted from "../utils/PageProted";
+import { MdOutlineRequestPage } from "react-icons/md";
 
 const Profile = () => {
   const naviget = useNavigate();
@@ -39,11 +40,11 @@ const Profile = () => {
       title: "Update Profile",
       icons: <FiSettings />,
     },
-    // {
-    //     id:4,
-    //     title:"Change Password",
-    //     icons:<MdOutlineRequestPage/>
-    // },
+    {
+        id:4,
+        title:"Change Password",
+        icons:<MdOutlineRequestPage/>
+    },
     // {
     //     id:5,
     //     title:"Logout",
@@ -96,7 +97,7 @@ const Profile = () => {
                 <div className=" bg-white rounded-3 px-4 py-4">
                   {profileActive === 1 && <Dashbord data={data} />}
 
-                  {profileActive === 2 && <Order />}
+                  {profileActive === 2 && <Order data={data}/>}
 
                   {profileActive === 3 && <UpdateProfile />}
                 </div>

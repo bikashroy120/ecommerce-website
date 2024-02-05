@@ -96,7 +96,7 @@ const Cart = () => {
                                 <div key={1} className=" mb-4">
                                 <div className=" gap-15 d-flex align-items-center">
                                   <div style={{width:"25%"}}>
-                                    <img src={`${image_url}uploads/${item.feature_image}`} className="img-fluid" alt="product image" />
+                                    <img src={`${image_url}uploads/${item.feature_image}`} className="img-fluid" alt="product" />
                                   </div>
                                   <div style={{width:"75%"}}>
                                     <p style={{fontSize:"14px"}}>{item.productname?.slice(0,35)}</p>

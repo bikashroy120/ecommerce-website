@@ -122,7 +122,7 @@ const Header = () => {
                         to="/profile"
                         className="d-flex align-items-center gap-10 text-white"
                       >
-                        <img src={!user.image ? user.image : "images/user.jpg"} style={{width:"40px", height:"40px",borderRadius:"50%"}} alt="user" />
+                        <img src={user.image ? user.image : "images/user.jpg"} style={{width:"40px", height:"40px",borderRadius:"50%"}} alt="user" />
                         {/* <p className="mb-0">
                         Log in <br /> My Account
                       </p> */}
