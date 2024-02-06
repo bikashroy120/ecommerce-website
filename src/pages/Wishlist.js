@@ -10,9 +10,7 @@ import { image_url } from "../utils/baseUrl";
 
 const Wishlist = () => {
   const dispacth = useDispatch()
-  const navigate = useNavigate()
-    const {wishlist,wishadd,isSuccess} = useSelector((state)=>state.product)
-    const {user} = useSelector((state)=>state.auth)
+  const wishList = useSelector((state)=>state.cart.showCart)
     const deleteWishlist = (id)=>{
       const data = {
         proId:id
@@ -21,24 +19,19 @@ const Wishlist = () => {
       toast.success("SuccessFully remove wishlist")
     }
 
-    useEffect(()=>{
-      dispacth(getWishlist())
-    },[wishadd,dispacth])
-  
+
+    console.log("=======hhhh=======",wishList)
+
+
     // useEffect(()=>{
     //   if(wishadd && isSuccess){
     //     toast.success("SuccessFully remove wishlist")
     //   }
     // },[wishadd,isSuccess])
 
-    console.log(wishlist)
 
 
-    useEffect(()=>{
-      if(!user){
-        navigate(-1)
-      }
-    },[user])
+
 
 
   return (
@@ -48,9 +41,9 @@ const Wishlist = () => {
       <Container class1="wishlist-wrapper home-wrapper-2 py-5">
         <div className="row">
 
-
+{/* 
           {
-            wishlist?.map((item,i)=>{
+            wishList?.map((item,i)=>{
               return(
                 <div className="col-lg-3 col-md-4 col-6" key={i}>
                 <div className="wishlist-card position-relative">
@@ -62,7 +55,7 @@ const Wishlist = () => {
                   />
                   <div className="wishlist-card-image">
                     <img
-                      src={item.images[0] ? image_url+'uploads/'+item.images[0] :"images/2748558.png"}
+                      src={item.images[0] ? item.images[0] :"images/2748558.png"}
                       className="img-fluid w-100"
                       alt="watch"
                     />
@@ -77,7 +70,7 @@ const Wishlist = () => {
               </div>
               )
             })
-          }
+          } */}
         </div>
       </Container>
     </>

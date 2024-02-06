@@ -3,14 +3,16 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     itemList: localStorage.getItem("cartdata") ? JSON.parse(localStorage.getItem("cartdata")) : [],
+    wishList: localStorage.getItem("wishList") ? JSON.parse(localStorage.getItem("wishList")) : [],
     totalQuantity: 0,
     showCart: false,
     subtotal: 0,
-    filter:""
+    filter:"",
   },
   reducers: {
     clearcart(state, action) {
       state.itemList = [];
+      state.wishList=[];
       state.totalQuantity = 0;
       state.showCart = false;
       state.subtotal = 0;
@@ -44,6 +46,31 @@ const cartSlice = createSlice({
 
       // console.log(localStorage.getItem('cartdata'));
     },
+
+    addToWhishList(state, action) {
+      const newItem = action.payload;
+      console.log("hello====",newItem)
+      const exitingItem = state.wishList.find(
+        (itemdata) => itemdata._id === newItem._id
+      );
+      if (exitingItem) {
+
+      } else {
+        state.wishList.push(newItem);
+      }
+        localStorage.setItem("wishList", JSON.stringify(state.wishList));
+
+      // console.log(localStorage.getItem('cartdata'));
+    },
+
+    removeToWhishList(state, action) {
+      const id = action.payload;
+      state.itemList = state.itemList.filter(
+        (itemdata) => itemdata._id !== id
+      );
+      localStorage.setItem("wishList", JSON.stringify(state.wishList));
+    },
+
     decrementQty(state, action) {
       const id = action.payload;
       const exitingItem = state.itemList.find(
