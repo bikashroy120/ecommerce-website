@@ -123,6 +123,12 @@ export const authApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getSingleOrder: builder.query({
+      query: (id) => ({
+        url: `user/order/${id}`,
+        method: "GET",
+      }),
+    }),
     updateUser: builder.mutation({
       query: (data) => ({
         url: `user/update`,
@@ -152,5 +158,6 @@ export const {
   useCreateOrderMutation,
   useGetOrderQuery,
   useUpdateUserMutation,
-  useUpdatePasswordMutation
+  useUpdatePasswordMutation,
+  useGetSingleOrderQuery,
 } = authApi;

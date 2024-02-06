@@ -1031,7 +1031,7 @@ footer .input-group-text {
 }
 
 .invoice_box_first_div{
-  background: #febd69;
+  /* background: #febd69; */
   padding: 30px 30px;
 }
 
@@ -1040,12 +1040,9 @@ footer .input-group-text {
   align-items: center;
   justify-content: space-between;
   padding: 5px 0;
-  border-bottom: 2px solid #fff;
+  border-bottom: 1px solid rgb(204, 204, 204);
 }
 
-.background_color{
-  background: #fdce91;
-}
 
 .Category_Product{
   padding: 20px 10px !important;

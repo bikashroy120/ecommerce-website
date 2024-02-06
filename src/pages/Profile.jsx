@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { RxDashboard } from "react-icons/rx";
 import { GrUnorderedList } from "react-icons/gr";
 import { FiSettings } from "react-icons/fi";
