@@ -8,9 +8,6 @@ const FlashDeals = () => {
 
     const {data} = useGetAllProductQuery("")
 
-
-    console.log("=============Product",data?.products)
-
     const Completionist = () => <span>You are good to go!</span>;
     const renderer = ({ hours, minutes, seconds, completed }) => {
       if (completed) {

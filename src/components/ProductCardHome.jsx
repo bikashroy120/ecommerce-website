@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { BsBagPlusFill } from "react-icons/bs";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { cartActions } from "../redux/features/card/cardSlice";
+import { wishActions } from "../redux/features/wishlist/wishlistSlice";
 
 const ProductCardHome = (props) => {
   const { grid, product } = props;
@@ -13,7 +14,7 @@ const ProductCardHome = (props) => {
   const dispatch = useDispatch();
 
   const addWish = (item) => {
-    dispatch(cartActions.addToWhishList(item));
+    dispatch(wishActions.addToWhishList(item));
     toast.success("SuccessFully add wishlist");
   };
 
