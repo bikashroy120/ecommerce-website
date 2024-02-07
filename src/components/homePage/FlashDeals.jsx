@@ -3,9 +3,10 @@ import Container from "../Container";
 import Countdown from "react-countdown";
 import { useGetAllProductQuery } from "../../redux/features/banner/bannerApi";
 import ProductCardHome from "../ProductCardHome";
+import { useNavigate } from "react-router-dom";
 
 const FlashDeals = () => {
-
+    const  navigate = useNavigate()
     const {data} = useGetAllProductQuery("")
 
     const Completionist = () => <span>You are good to go!</span>;
@@ -44,7 +45,7 @@ const FlashDeals = () => {
           </div>
         </div>
         <div>
-          <button>See More</button>
+          <button onClick={()=>navigate("/product")}>See More</button>
         </div>
       </div>
 

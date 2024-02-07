@@ -23,7 +23,11 @@ const Wishlist = () => {
       <Container class1="wishlist-wrapper home-wrapper-2 py-5">
         <div className="row">
           {wishList.length === 0 ? (
-            <><NotFound></NotFound></>
+            <div className=" d-flex align-items-center justify-content-center">
+              <div style={{ width: "400px" }}>
+                <NotFound />
+              </div>
+            </div>
           ) : (
             <>
               {" "}

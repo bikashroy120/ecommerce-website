@@ -1,21 +1,22 @@
 import React from "react";
 import Container from "../Container";
 import { useGetAllCategoryQuery } from "../../redux/features/banner/bannerApi";
+import { useNavigate } from "react-router-dom";
 
 const ProductCategory = () => {
   const { data } = useGetAllCategoryQuery("");
-
-  console.log(data);
+  const navigate = useNavigate();
 
   const loading = false;
 
   return (
     <Container class1="home-wrapper-2 py-5">
       <div className="home_product_top">
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <div style={{ display: "flex", alignItems: "center",justifyContent:"space-between",width:"100%", gap: "1rem" }}>
           <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">
             Product Category
           </h2>
+            <button onClick={() => navigate("/product")}>See More</button>
         </div>
       </div>
       <div className="row">

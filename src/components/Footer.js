@@ -42,16 +42,16 @@ const Footer = () => {
                   PinCode: 131103
                 </address>
                 <a
-                  href="tel:+91 8264954234"
+                  href="tel:01773372120"
                   className="mt-3 d-block mb-1 text-white"
                 >
-                  +91 8264954234
+                  01773372120
                 </a>
                 <a
-                  href="mailto:navdeepdahiya753@gmail.com"
+                  href="mailto:bikashroydt@gmail.com"
                   className="mt-2 d-block mb-0 text-white"
                 >
-                  navdeepdahiya753@gmail.com
+                  bikashroydt@gmail.com
                 </a>
                 <div className="social_icons d-flex align-items-center gap-30 mt-4">
                   <a className="text-white" href="#">
@@ -112,7 +112,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-12">
               <p className="text-center mb-0 text-white">
-                &copy; {new Date().getFullYear()}; Powered by Developer's Corner
+                &copy; {new Date().getFullYear()}; Powered by Bikash Chandra
               </p>
             </div>
           </div>

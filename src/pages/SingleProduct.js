@@ -14,6 +14,7 @@ import { cartActions } from "../redux/features/card/cardSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { useGetSingleProductQuery } from "../redux/features/banner/bannerApi";
+import { wishActions } from "../redux/features/wishlist/wishlistSlice";
 
 const SingleProduct = () => {
   const prams = useParams();
@@ -45,6 +46,11 @@ const SingleProduct = () => {
       setImage(Singalproduct.images[0])
     }
   },[Singalproduct])
+
+  const addWish = (item) => {
+    dispatch(wishActions.addToWhishList(item));
+    toast.success("SuccessFully add wishlist");
+  };
 
   const addToCart = (product, count) => {
     if (product.quantity === 0) {
@@ -189,12 +195,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex align-items-center gap-15">
                   <div>
-                    <button>
-                      <TbGitCompare className="fs-5 me-2" /> Add to Compare
-                    </button>
-                  </div>
-                  <div>
-                    <button>
+                    <button onClick={()=>addWish(Singalproduct)} style={{border:"none",padding:"2px"}}>
                       <AiOutlineHeart className="fs-5 me-2" /> Add to Wishlist
                     </button>
                   </div>

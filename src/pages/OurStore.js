@@ -3,11 +3,12 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
 import Container from "../components/Container";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import OurStoreLeft from "../components/OurStore/OurStoreLeft";
 import { useGetAllProductQuery } from "../redux/features/banner/bannerApi";
 import Loader from "../components/Loader";
 import ReactPaginate from "react-paginate";
+import NotFound from "../components/NotFound";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(3);
@@ -16,19 +17,19 @@ const OurStore = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const {search,category} = useSelector((state)=>state.auth)
+  const { search, category } = useSelector((state) => state.auth);
 
-  const {data:products,isLoading} = useGetAllProductQuery(searchQuery,{})
+  const { data: products, isLoading } = useGetAllProductQuery(searchQuery, {});
 
   const itemsPerPage = 12;
 
-  const generateQuery = (selectedCategories,selectedBrands,HiLow) => {
+  const generateQuery = (selectedCategories, selectedBrands, HiLow) => {
     const queryParams = [];
 
     if (selectedCategories) {
       selectedCategories.forEach((category) => {
         queryParams.push(`category=${category}`);
-      })
+      });
     }
 
     if (selectedBrands) {
@@ -37,7 +38,7 @@ const OurStore = () => {
       });
     }
 
-    if(HiLow){
+    if (HiLow) {
       queryParams.push(`sort=${HiLow}`);
     }
 
@@ -45,23 +46,21 @@ const OurStore = () => {
   };
 
   useEffect(() => {
-    const query = generateQuery(selectedCategories,selectedBrands,HiLow);
+    const query = generateQuery(selectedCategories, selectedBrands, HiLow);
     setSearchQuery(`${query}&page=${page}&limit=${itemsPerPage}`);
-  }, [selectedCategories, page, selectedBrands,HiLow]);
+  }, [selectedCategories, page, selectedBrands, HiLow]);
 
-
-  useEffect(()=>{
-    if(search){
+  useEffect(() => {
+    if (search) {
       setSearchQuery(`search=${search}&page=${page}&limit=${itemsPerPage}`);
     }
-    if(category){
-      setSelectedCategories([category])
+    if (category) {
+      setSelectedCategories([category]);
     }
-
-  },[search,page,category])
+  }, [search, page, category]);
 
   const handlePageClick = (event) => {
-    setPage(event.selected+1)
+    setPage(event.selected + 1);
   };
 
   // console.log(last)
@@ -99,7 +98,7 @@ const OurStore = () => {
                   </select>
                 </div>
                 <div className="d-flex align-items-center gap-10 hide_item">
-                  <p className="totalproducts mb-0">21 Products</p>
+                  <p className="totalproducts mb-0">{products?.products.length} Products Show</p>
                   <div className="d-flex gap-10 align-items-center grid">
                     <img
                       onClick={() => {
@@ -143,22 +142,37 @@ const OurStore = () => {
                 className="d-flex flex-wrap Last_item_product"
                 style={{ gap: "9px" }}
               >
-                {isLoading ? <><Loader /></> :<><ProductCard grid={grid} product={products?.products}/></>}
-                
+                {isLoading ? (
+                  <>
+                    <Loader />
+                  </>
+                ) : (
+                  <>
+                    {products?.products?.length === 0 ? (
+                      <div style={{display:"flex",alignItems:"center",justifyContent:"center",width:"100%"}}>
+                        <NotFound />
+                      </div>
+                    ) : (
+                      <>
+                        <ProductCard grid={grid} product={products?.products} />
+                      </>
+                    )}
+                  </>
+                )}
               </div>
               <div className="py-3">
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel=">>"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={itemsPerPage}
-                pageCount={Math.ceil(products?.item / itemsPerPage)}
-                previousLabel="<<"
-                renderOnZeroPageCount={null}
-                containerClassName=" pagination "
-                activeClassName="pagination-active"
-              />
-            </div>
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel=">>"
+                  onPageChange={handlePageClick}
+                  pageRangeDisplayed={itemsPerPage}
+                  pageCount={Math.ceil(products?.item / itemsPerPage)}
+                  previousLabel="<<"
+                  renderOnZeroPageCount={null}
+                  containerClassName=" pagination "
+                  activeClassName="pagination-active"
+                />
+              </div>
             </div>
           </div>
         </div>
