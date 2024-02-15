@@ -4,7 +4,7 @@ import { userLoggedIn } from "../auth/authSlice";
 export const apiSlice = createApi({
     reducerPath:"api",
     baseQuery:fetchBaseQuery({
-        baseUrl:"http://localhost:5000/api/",
+        baseUrl:"https://api-75r3.onrender.com/api/",
         prepareHeaders: (headers) => {
             // Get the token from localStorage
             const tokenString = localStorage.getItem("token");
