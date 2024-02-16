@@ -973,7 +973,15 @@ footer .input-group-text {
   align-items: center;
   gap: 1rem;
   width: 100%;
-  margin-bottom: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.Chakeout_box2{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .delevery_item {
@@ -1317,5 +1325,13 @@ footer .input-group-text {
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
+  }
+  .Chakeout_box2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
 }
