@@ -400,6 +400,19 @@ footer .input-group-text {
   font-size: 16px;
   color: var(--color-1c1c1b);
 }
+
+.product_Price{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.product_Price p{
+  margin: 0 !important;
+  padding: 0 !important; 
+}
+
 .product-card p.description {
   font-size: 13px;
   color: var(--color-777777);
@@ -1292,5 +1305,17 @@ footer .input-group-text {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 0.5rem !important;
+  }
+
+  .product_Price{
+    gap: 3px;
+  }
+
+  .product-card {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
   }
 }

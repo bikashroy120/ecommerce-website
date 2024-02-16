@@ -83,11 +83,10 @@ const ProductCardHome = (props) => {
                 <h6 className="brand">{item.brand}</h6>
                 <h5
                   className="product-title"
-                  style={{ height: "35px", width: "100%" }}
                 >
                   {item.title.slice(0, 30)}...
                 </h5>
-                <div className=" d-flex align-items-center gap-10">
+                <div className="product_Price">
                   <p
                     style={{ fontSize: "18px", fontWeight: 700 }}
                     className="price"
@@ -109,12 +108,12 @@ const ProductCardHome = (props) => {
                     alignItems: "center",
                     width: "100%",
                     justifyContent: "space-between",
-                    marginTop:"-20px"
+                    marginTop:"-10px"
                   }}
                 >
                   <ReactStars
                     count={5}
-                    size={24}
+                    size={23}
                     value={Number(5)}
                     edit={false}
                     activeColor="#ffd700"

@@ -36,7 +36,7 @@ const Header = () => {
   useEffect(()=>{
     dispatch(cartActions.getTotals(cartItem))
   },[cartItem])
-
+ 
   const handelCategory = (category)=>{
     dispatch(addCategory(category));
     navigate("/product");
@@ -256,7 +256,7 @@ const Header = () => {
                 <img
                   src={
                     user.image
-                      ? image_url + "uploads/" + user.image
+                      ? user.image
                       : "images/user.jpg"
                   }
                   style={{ width: "40px", height: "40px", borderRadius: "50%" }}

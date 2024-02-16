@@ -2,10 +2,18 @@ import React from "react";
 import Container from "../Container";
 import { useGetAllCategoryQuery } from "../../redux/features/banner/bannerApi";
 import { useNavigate } from "react-router-dom";
+import { addCategory } from "../../redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const ProductCategory = () => {
   const { data } = useGetAllCategoryQuery("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handelCategory = (category)=>{
+    dispatch(addCategory(category));
+    navigate("/product");
+  }
 
   const loading = false;
 
@@ -30,7 +38,7 @@ const ProductCategory = () => {
                   return (
                     <div
                       key={i}
-                      // onClick={() => gsidid(item.title)}
+                      onClick={() => handelCategory(item.title)}
                       className="d-flex gap-2 flex-column align-items-center Category_Product"
                     >
                       <img
