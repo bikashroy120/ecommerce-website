@@ -63,8 +63,8 @@ const SingleProduct = () => {
           feature_image: product.images[0],
           price: product.price,
           quentyte: count,
-          p_brand: product.brand.title,
-          p_category: product.category.title,
+          p_brand: product.brand,
+          p_category: product.category,
           p_avaleable: product.quantity,
         })
       );

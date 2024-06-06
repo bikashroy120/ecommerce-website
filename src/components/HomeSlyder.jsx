@@ -27,12 +27,6 @@ const HomeSlyder = ({ data }) => {
               className=" rounded-3 banner_image"
               alt="main banner"
             />
-            <div className="main-banner-content position-absolute">
-              <h4>all product</h4>
-              <h5>megastore</h5>
-              <p>save up to 20% off</p>
-              <Link className="button">BUY NOW</Link>
-            </div>
           </div>
         ))}
 

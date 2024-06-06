@@ -34,6 +34,9 @@ const Checkout = () => {
   const [createOrder, { isLoading, data, isSuccess, error }] =
     useCreateOrderMutation();
 
+
+  console.log(cartItem)
+
   const [dId, setDID] = useState(1);
   const [cId, setCID] = useState(1);
   const [total, setTotle] = useState();

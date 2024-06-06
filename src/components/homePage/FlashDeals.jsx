@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const FlashDeals = () => {
     const  navigate = useNavigate()
+    const query = "sold[get]=1"
     const {data} = useGetAllProductQuery("")
 
     const Completionist = () => <span>You are good to go!</span>;

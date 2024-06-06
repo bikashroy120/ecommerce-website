@@ -1,10 +1,12 @@
 import {createApi,fetchBaseQuery} from "@reduxjs/toolkit/query/react"
 import { userLoggedIn } from "../auth/authSlice";
 
+// https://api-75r3.onrender.com
+
 export const apiSlice = createApi({
     reducerPath:"api",
     baseQuery:fetchBaseQuery({
-        baseUrl:"https://api-75r3.onrender.com/api/",
+        baseUrl:"http://localhost:5000/api/",
         prepareHeaders: (headers) => {
             // Get the token from localStorage
             const tokenString = localStorage.getItem("token");
