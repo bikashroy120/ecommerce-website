@@ -121,7 +121,7 @@ const SingleProduct = () => {
                   </div>
                 );
               })}
-              {/* {'http://localhost:5000/uploads/'+item.images[0]} */}
+              {/* {'https://test-api1-lac.vercel.app/uploads/'+item.images[0]} */}
             </div>
           </div>
           <div className="col-md-7 col-12">

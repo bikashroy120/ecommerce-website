@@ -129,6 +129,12 @@ export const authApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getShippingCost: builder.query({
+      query: (id) => ({
+        url: `shipping-cost`,
+        method: "GET",
+      }),
+    }),
     updateUser: builder.mutation({
       query: (data) => ({
         url: `user/update`,
@@ -160,4 +166,5 @@ export const {
   useUpdateUserMutation,
   useUpdatePasswordMutation,
   useGetSingleOrderQuery,
+  useGetShippingCostQuery,
 } = authApi;
