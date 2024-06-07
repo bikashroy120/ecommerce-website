@@ -1,11 +1,10 @@
 import React from "react";
 import Container from "../Container";
 import HomeSlyder from "../HomeSlyder";
-import { useGetAllBannerQuery } from "../../redux/features/banner/bannerApi";
 import Loader from "../Loader";
 
-const Banner = () => {
-  const { data, isLoading } = useGetAllBannerQuery("");
+const Banner = ({ data, isLoading }) => {
+
 
   console.log("banner=========", data?.banner);
 

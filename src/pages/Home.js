@@ -6,11 +6,15 @@ import Banner from "../components/homePage/Banner";
 import ProductCategory from "../components/homePage/ProductCategory";
 import FlashDeals from "../components/homePage/FlashDeals";
 import HomeProduct from "../components/homePage/HomeProduct";
+import { useGetAllBannerQuery } from "../redux/features/banner/bannerApi";
 
 const Home = () => {
+  const { data, isLoading } = useGetAllBannerQuery("");
+
+
   return (
     <>
-      <Banner />
+      <Banner data={data} isLoading={isLoading}/>
       <ProductCategory />
       <FlashDeals />
       <HomeProduct />

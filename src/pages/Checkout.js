@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import PageProted from "../utils/PageProted";
-import { useCreateOrderMutation } from "../redux/features/auth/authApi";
+import { useCreateOrderMutation, useGetShippingCostQuery } from "../redux/features/auth/authApi";
 import { toast } from "react-toastify";
 
 let schema = yup.object().shape({
@@ -30,9 +30,25 @@ const Checkout = () => {
   const cartItem = useSelector((state) => state.cart.itemList);
   const subtotal = useSelector((state) => state.cart.subtotal);
   const { user } = useSelector((state) => state.auth);
+  const [shippingCost,setShippingCost]=useState({})
+  const [value,setValue]=useState(0)
 
   const [createOrder, { isLoading, data, isSuccess, error }] =
     useCreateOrderMutation();
+
+  const {data:ship,isSuccess:shipSuccess} = useGetShippingCostQuery("")
+
+
+  console.log("shiping",shippingCost)
+
+ 
+  useEffect(()=>{
+    if(ship){
+      setShippingCost(ship[0])
+    }
+  },[shipSuccess,ship])
+
+  console.log(cartItem)
 
   const [dId, setDID] = useState(1);
   const [cId, setCID] = useState(1);
@@ -53,13 +69,13 @@ const Checkout = () => {
   const dalevary = [
     {
       id: 1,
-      title: "FedEx",
-      sub: "Delivery: Today Cost :$60.00",
+      title: "In Dhaka",
+      sub: `Delivery Cost :$ ${shippingCost?.inDhaka}`,
     },
     {
       id: 2,
-      title: "UPS",
-      sub: "Delivery: 7 Days Cost :$20.00",
+      title: "Out Of Dhaka",
+      sub: `Delivery Cost :$ ${shippingCost?.outDhaka}`,
     },
   ];
 
@@ -100,15 +116,18 @@ const Checkout = () => {
       setTotle(subtotal);
     }
     if (dId === 1) {
-      setTotle(subtotal + 60);
+      setTotle(subtotal + Number(shippingCost.inDhaka));
+      setValue(shippingCost?.inDhaka)
     }
     if (dId === 2) {
-      setTotle(subtotal + 20);
+      setTotle(subtotal + Number(shippingCost.outDhaka));
+      setValue(shippingCost?.outDhaka)
     }
-  }, [dId, subtotal]);
+  }, [dId, subtotal,shippingCost]);
 
   useEffect(() => {
     formik.values.shipping = dId === 1 ? "FedEx" : "UPS";
+    formik.values.shippingCost = dId === 1 ? Number(shippingCost.inDhaka) :Number(shippingCost.outDhaka);
     formik.values.method = cId === 1 ? "Cash" : "Card";
     formik.values.totle = total;
     formik.values.products = cartItem;
@@ -141,6 +160,7 @@ const Checkout = () => {
       totle: "",
       discount: "00",
       products: [],
+      shippingCost:0,
     },
     validationSchema: schema,
     onSubmit: async (values) => {
@@ -498,10 +518,7 @@ const Checkout = () => {
                       <div className="d-flex justify-content-between mt-2 align-items-center">
                         <h6 className="mb-0 total">Shipping Cost</h6>
                         <h6 className="mb-0 total-price">
-                          ${" "}
-                          {(!dId && "00") ||
-                            (dId === 1 && "60") ||
-                            (dId === 2 && "20")}
+                        ${value}
                         </h6>
                       </div>
                       <div className="d-flex justify-content-between mt-3 align-items-center">
